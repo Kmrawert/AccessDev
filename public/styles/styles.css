@@ -1,3 +1,39 @@
 .list-group-item {
   line-height: 2.5;
 }
+
+.mainContent{
+  position: relative;
+  display: flex;
+  width: 100%;
+  justify-content:space-between;
+
+}
+
+#profileArea,
+#gigArea{
+position: relative;
+display: flex;
+border-left: 1px solid black;
+border-right: 1px solid black;
+text-align: center;
+flex-flow: column;
+flex-basis: 25%;
+}
+
+#postArea{
+  position: relative;
+display: flex;
+text-align: center;
+flex-flow: column;
+flex-basis: 50%;
+}
+
+#profilePic{
+  width:200px;
+  border-radius: 100%;
+  margin: 0 auto;
+}
+.star{
+  color: gold;
+}
