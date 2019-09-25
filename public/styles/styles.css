@@ -1,6 +1,10 @@
 .list-group-item {
   line-height: 2.5;
 }
+body{
+  margin: 0;
+  padding: 0;
+}
 
 .mainContent{
   position: relative;
@@ -10,30 +14,67 @@
 
 }
 
-#profileArea,
-#gigArea{
+#profileArea{
 position: relative;
 display: flex;
-border-left: 1px solid black;
-border-right: 1px solid black;
+/* border-right: 1px solid black; */
 text-align: center;
 flex-flow: column;
 flex-basis: 25%;
 }
 
-#postArea{
+#postArea,
+#gigArea{
   position: relative;
-display: flex;
+  border-left: 1px solid black;
+  display: flex;
 text-align: center;
 flex-flow: column;
-flex-basis: 50%;
+flex-basis: 37.5%;
 }
 
+
 #profilePic{
-  width:200px;
+  width:150px;
   border-radius: 100%;
   margin: 0 auto;
 }
+.stats{
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  display: inline-flex;
+  justify-content: center;
+}
+.stats > h5, h6, .star, a{
+  margin: 0 5px;
+  padding: 10px 0;
+}
 .star{
   color: gold;
+}
+.profileButtons{
+  margin: 50px 5px 50px;
+}
+#gigContent{
+  position: relative;
+  width: 80%;
+  margin: 20px auto 0;
+  border: 1px solid black;
+
+}
+#gigHeader{
+  position: relative;
+  width: 100%;
+  display: inline-flex;
+  flex-flow: column;
+  justify-content: flex-start;
+  border-bottom: 1px solid black;
+
+}
+#gigHeader > a {
+  width: 40%;
+  margin: 10px;
+  border-radius: 15px
+
 }
