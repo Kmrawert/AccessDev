@@ -44,7 +44,7 @@ module.exports = function(sequelize, DataTypes) {
           allowNull: true,
           defaultValue: null,
           len: [0,500]
-        }, 
+        }
     });
   
     Talent.associate = function(models) {

@@ -1,6 +1,6 @@
 require("dotenv").config();
 var Kraken = require('kraken'),
-var fs = require('fs');
+fs = require('fs');
 var db = require("../models");
 var password = process.env.krakenAPI_Secret;
 var krakenAPI = process.env.krakenAPI_Key;
