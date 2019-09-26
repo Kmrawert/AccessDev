@@ -1,17 +1,31 @@
 <div id="formContainer">
+    <h3>Gift a Gig!</h3>
     <div id="formArea">
         <form action="/postgig">
         <label for="Title">title</label>
             <input type="text" name="fname"><br>
-            <label for="start">Start date:</label>
-        <input type="date" id="date" name="gig-date"
+        <label for="start">Start date:</label>
+       <input type="date" id="start" name="trip-start"
        value="YYYY-MM-DD">
         <label for="location">Location</label>
         <input type="text" name="location"><br>
+        <label>Select Genre</label>
+        <label>Browser Select</label>
+        <select class="browser-default">
+            <option value="" disabled selected>Choose your option</option>
+            <option value="funk">Funk</option>
+            <option value="randb">R&B</option>
+            <option value="rock">Rock</option>
+            <option value="jazz">Jazz</option>
+            <option value="classical">Classical</option>
+            <option value="electronic">Electronic</option>
+            <option value="country">Country</option>
+            <option value="blues">Blues</option>
+        </select>
           <label for="textarea1">Description</label>
          <textarea id="textarea1" name="description" class="materialize-textarea"></textarea>
         <p>Select your instruments:</p>
-        <div>
+        <div class="instruments">
         <p>
             <label>
                 <input type="checkbox" value="guitar" />
@@ -43,3 +57,12 @@
         </form>
     </div>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+  var elems = document.querySelectorAll('select');
+  var instances = M.FormSelect.init(elems);
+   var schedule = document.querySelectorAll('.datepicker');
+    var instances2 = M.Datepicker.init(schedule, options);
+  
+});
+</script>
