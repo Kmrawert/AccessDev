@@ -8,22 +8,38 @@
        value="YYYY-MM-DD">
         <label for="location">Location</label>
         <input type="text" name="location"><br>
-        <label for="description">Description</label>
-           <textarea name="description" id="description"></textarea>
-        <p>Select a maintenance drone:</p>
-
+          <label for="textarea1">Description</label>
+         <textarea id="textarea1" name="description" class="materialize-textarea"></textarea>
+        <p>Select your instruments:</p>
         <div>
-        <input type="radio" id="Keys" name="instrument" value="Keys"
-         checked>
-        <label for="Keys">keys</label>
-        <input type="radio" id="Bass" name="instrument" value="Bass"
-         checked>
-        <label for="Bass">Bass</label>
-        <input type="radio" id="Guitar" name="instrument" value="Guitar"
-         checked>
-        <label for="Guitar">Guitar</label>
+        <p>
+            <label>
+                <input type="checkbox" value="guitar" />
+                <span>Guitar</span>
+            </label>
+            <label>
+                <input type="checkbox" value="Bass"  />
+                <span>Bass</span>
+            </label>
+            <label>
+                <input type="checkbox" value="Keys" />
+                <span>Keys</span>
+            </label>
+            <label>
+                <input type="checkbox" value="Drums"  />
+                <span>Drums</span>
+            </label>
+            <label>
+                <input type="checkbox" value="Other"  />
+                <span>Other</span>
+            </label>
+        </p>
+
+   
         </div>
-        <input type="submit" value="Submit">
+          <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+             <i class="material-icons right">send</i>
+        </button>
         </form>
     </div>
 </div>
