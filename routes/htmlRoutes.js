@@ -14,8 +14,9 @@ module.exports = function(app) {
     });
   });
   // Load Profile Creation page
-  app.get("/profile", function(req, res) {
+  app.get("/profile/:id", function(req, res) {
     res.render("profile", {});
+
   });
   app.get("/giftgig", function(req, res) {
       res.render("giftgig", {});

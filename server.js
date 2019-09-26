@@ -1,7 +1,6 @@
 require("dotenv").config();
 var express = require("express");
 var exphbs = require("express-handlebars");
-var password = process.env.krakenAPI_Secret;
 
 var db = require("./models");
 
