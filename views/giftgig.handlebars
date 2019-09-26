@@ -1,29 +1,68 @@
 <div id="formContainer">
+    <h3>Gift a Gig!</h3>
     <div id="formArea">
         <form action="/postgig">
         <label for="Title">title</label>
             <input type="text" name="fname"><br>
-            <label for="start">Start date:</label>
-        <input type="date" id="date" name="gig-date"
+        <label for="start">Start date:</label>
+       <input type="date" id="start" name="trip-start"
        value="YYYY-MM-DD">
         <label for="location">Location</label>
         <input type="text" name="location"><br>
-        <label for="description">Description</label>
-           <textarea name="description" id="description"></textarea>
-        <p>Select a maintenance drone:</p>
+        <label>Select Genre</label>
+        <label>Browser Select</label>
+        <select class="browser-default">
+            <option value="" disabled selected>Choose your option</option>
+            <option value="funk">Funk</option>
+            <option value="randb">R&B</option>
+            <option value="rock">Rock</option>
+            <option value="jazz">Jazz</option>
+            <option value="classical">Classical</option>
+            <option value="electronic">Electronic</option>
+            <option value="country">Country</option>
+            <option value="blues">Blues</option>
+        </select>
+          <label for="textarea1">Description</label>
+         <textarea id="textarea1" name="description" class="materialize-textarea"></textarea>
+        <p>Select your instruments:</p>
+        <div class="instruments">
+        <p>
+            <label>
+                <input type="checkbox" value="guitar" />
+                <span>Guitar</span>
+            </label>
+            <label>
+                <input type="checkbox" value="Bass"  />
+                <span>Bass</span>
+            </label>
+            <label>
+                <input type="checkbox" value="Keys" />
+                <span>Keys</span>
+            </label>
+            <label>
+                <input type="checkbox" value="Drums"  />
+                <span>Drums</span>
+            </label>
+            <label>
+                <input type="checkbox" value="Other"  />
+                <span>Other</span>
+            </label>
+        </p>
 
-        <div>
-        <input type="radio" id="Keys" name="instrument" value="Keys"
-         checked>
-        <label for="Keys">keys</label>
-        <input type="radio" id="Bass" name="instrument" value="Bass"
-         checked>
-        <label for="Bass">Bass</label>
-        <input type="radio" id="Guitar" name="instrument" value="Guitar"
-         checked>
-        <label for="Guitar">Guitar</label>
+   
         </div>
-        <input type="submit" value="Submit">
+          <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+             <i class="material-icons right">send</i>
+        </button>
         </form>
     </div>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+  var elems = document.querySelectorAll('select');
+  var instances = M.FormSelect.init(elems);
+   var schedule = document.querySelectorAll('.datepicker');
+    var instances2 = M.Datepicker.init(schedule, options);
+  
+});
+</script>
