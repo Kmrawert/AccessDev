@@ -1,0 +1,29 @@
+<div id="formContainer">
+    <div id="formArea">
+        <form action="/postgig">
+        <label for="Title">title</label>
+            <input type="text" name="fname"><br>
+            <label for="start">Start date:</label>
+        <input type="date" id="date" name="gig-date"
+       value="YYYY-MM-DD">
+        <label for="location">Location</label>
+        <input type="text" name="location"><br>
+        <label for="description">Description</label>
+           <textarea name="description" id="description"></textarea>
+        <p>Select a maintenance drone:</p>
+
+        <div>
+        <input type="radio" id="Keys" name="instrument" value="Keys"
+         checked>
+        <label for="Keys">keys</label>
+        <input type="radio" id="Bass" name="instrument" value="Bass"
+         checked>
+        <label for="Bass">Bass</label>
+        <input type="radio" id="Guitar" name="instrument" value="Guitar"
+         checked>
+        <label for="Guitar">Guitar</label>
+        </div>
+        <input type="submit" value="Submit">
+        </form>
+    </div>
+</div>

@@ -1,0 +1,51 @@
+module.exports = function(sequelize, DataTypes) {
+    var Talent = sequelize.define("Talent", {
+      // Giving the Talent model a name of type STRING
+      name: DataTypes.STRING,
+      instrument: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate:{
+            notNull: true,
+            msg: 'Please enter your Instrument(s)'
+             }
+            
+        },   
+      location: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate:{
+            notNull: true,
+            msg: 'Please enter your Location'
+             }
+            
+        },   
+        rating: DataTypes.DECIMAL(10,2),
+        numberofGigs: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            defaultValue: 0,
+            len: [1]
+        },
+        moneyEarned: {
+            type: DataTypes.DECIMAL(10,2),
+            allowNull: false,
+            defaultValue: 0,
+            len: [1]
+        },
+
+          
+
+    });
+  
+    Talent.associate = function(models) {
+        // Associating Talent with Posts
+        // When an Talent is deleted, also delete any associated Posts
+        Talent.hasMany(models.Rating, {
+          onDelete: "cascade"
+        });
+      };
+  
+    return Talent;
+  };
+  

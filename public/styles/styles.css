@@ -1,3 +1,113 @@
 .list-group-item {
   line-height: 2.5;
 }
+body{
+  margin: 0;
+  padding: 0;
+}
+
+.mainContent{
+  position: relative;
+  display: flex;
+  width: 100%;
+  justify-content:space-between;
+
+}
+
+#profileWrapper{
+position: relative;
+display: flex;
+/* border-right: 1px solid black; */
+text-align: center;
+flex-flow: column;
+flex-basis: 25%;
+}
+#profileArea{
+  position: -webkit-sticky;
+  position: sticky;
+  z-index: 2;
+  background: white;
+  top: -1px;
+display: flex;
+/* border-right: 1px solid black; */
+text-align: center;
+flex-flow: column;
+
+}
+
+#postArea,
+#gigArea{
+  position: relative;
+  border-left: 1px solid lightgray;
+  display: flex;
+text-align: center;
+flex-flow: column;
+flex-basis: 37.5%;
+}
+
+
+#profilePic{
+  width:150px;
+  border-radius: 100%;
+  margin: 0 auto;
+}
+.stats{
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  display: inline-flex;
+  justify-content: center;
+}
+.stats > h5, h6, .star, a{
+  margin: 0 5px;
+  padding: 10px 0;
+}
+.star{
+  color: gold;
+}
+.profileButtons{
+  margin: 50px 5px 50px;
+}
+.profileButtons > a{
+  border-radius: 15px;
+}
+#gigContent{
+  position: -webkit-sticky;
+  position: sticky;
+  z-index: 1;
+  background: white;
+  top: 180px;
+  width: 90%;
+  margin: 0px auto 0;
+
+
+}
+#gigHeader{
+  position: -webkit-sticky;
+  position: sticky;
+  z-index: 2;
+  background: white;
+  top: -1px;
+  width: 100%;
+  margin: 0 auto;
+  display: inline-flex;
+  flex-flow: column;
+  justify-content: flex-start;
+  border-bottom: 1px solid lightgray;
+
+}
+#gigHeader > a {
+  width: 170px;
+  margin: 10px 0 10px 5%;
+  border-radius: 15px
+
+}
+#formContainer{
+  position: relative;
+  margin: 15px auto 0;
+  width: 60%;
+
+}
+#instruments{
+  width: 100%;
+}
