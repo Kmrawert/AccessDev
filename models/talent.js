@@ -33,9 +33,18 @@ module.exports = function(sequelize, DataTypes) {
             defaultValue: 0,
             len: [1]
         },
-
-          
-
+        bio: {
+          type: DataTypes.STRING,
+          allowNull: true,
+          defaultValue: null,
+          len: [0,250]
+        },    
+        YouTubeLinks: {
+          type: DataTypes.STRING,
+          allowNull: true,
+          defaultValue: null,
+          len: [0,500]
+        }, 
     });
   
     Talent.associate = function(models) {

@@ -4,7 +4,7 @@ module.exports = function(app) {
   app.get('/',function(req,res){
     res.redirect('/home');
   } )
-  // Load index page
+  // Load main content page
   app.get("/home", function(req, res) {
     db.Example.findAll({}).then(function(dbExamples) {
       res.render("home", {
@@ -12,6 +12,10 @@ module.exports = function(app) {
         examples: dbExamples
       });
     });
+  });
+  // Load Profile Creation page
+  app.get("/profile", function(req, res) {
+    res.render("profile", {});
   });
   app.get("/giftgig", function(req, res) {
       res.render("giftgig", {});
