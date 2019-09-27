@@ -3,6 +3,7 @@ var $exampleText = $("#example-text");
 var $exampleDescription = $("#example-description");
 var $submitBtn = $("#submit");
 var $exampleList = $("#example-list");
+var more = document.querySelectorAll('.postContainer a');
 // The API object contains methods for each kind of request we'll make
 var API = {
   saveExample: function(example) {
@@ -93,17 +94,17 @@ var handleDeleteBtnClick = function() {
   });
 };
 
-// Add event listeners to the submit and delete buttons
-// $submitBtn.on("click", handleFormSubmit);
-// $exampleList.on("click", ".delete", handleDeleteBtnClick);
+more.forEach(link =>{
+  let id= link.getAttribute('value');
+  console.log(id);
+  link.addEventListener('click', e =>{
+    e.preventDefault();
+    fetch(`api/gigs/${id}`)
+      .then(res =>
+       res.json()
+      ).then(data =>{
+        console.log(data);
+      })
+  })
+})
 
-
-
-// var editProfile= document.querySelector("#editProfile");
-// editProfile.addEventListener('click', (e)=>{
-//   e.preventDefault()
-
-//   fetch('/profile:id')
-// })
-
-// var instance = M.FormSelect.getInstance(elem);
