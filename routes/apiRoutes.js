@@ -16,12 +16,21 @@ module.exports = function(app) {
       res.json(dbExamples);
     });
   });
+  app.get("/api/gigs/:id", function(req, res) {
+    db.Gigs.findOne({
+      where: {
+        id: req.params.id
+      }
+    }).then(function(post) {
+      res.json(post);
+    });
+  });
 
   // Create a new example
   app.post("/api/gigs", function(req, res) {
    const gigs = db.Gigs;
    const {title, date, location, money, genre, description, instrument}= req.body;
-   let band = instrument.join(',');
+   let band = instrument.join(', ');
    gigs.create({title, date, location, money, genre, description, instrument: band}).then(data =>{
      res.json(data);
      console.log(data);
