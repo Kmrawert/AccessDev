@@ -94,16 +94,16 @@ var handleDeleteBtnClick = function() {
 };
 
 // Add event listeners to the submit and delete buttons
-$submitBtn.on("click", handleFormSubmit);
-$exampleList.on("click", ".delete", handleDeleteBtnClick);
+// $submitBtn.on("click", handleFormSubmit);
+// $exampleList.on("click", ".delete", handleDeleteBtnClick);
 
 
 
-var editProfile= document.querySelector("#editProfile");
-editProfile.addEventListener('click', (e)=>{
-  e.preventDefault()
+// var editProfile= document.querySelector("#editProfile");
+// editProfile.addEventListener('click', (e)=>{
+//   e.preventDefault()
 
-  fetch('/profile:id')
-})
+//   fetch('/profile:id')
+// })
 
-var instance = M.FormSelect.getInstance(elem);
+// var instance = M.FormSelect.getInstance(elem);
