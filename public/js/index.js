@@ -93,6 +93,23 @@ var handleDeleteBtnClick = function() {
     refreshExamples();
   });
 };
+function renderPost(data){
+  var gigArea = document.querySelector('#gigArea');
+  const template = `<div id="gigHeader">
+  <h5>${data.title}</h5>
+  <div class="gig stats">
+    <h6>$${data.money} per person</h6>
+    <h6>${data.date}</h6>
+  </div>
+<a class="waves-effect waves-light btn-large"><i class="material-icons left">monetization_on</i>Grab It!</a>
+</div>
+<div id="gigContent">
+<p>We need  ${data.instuments} for a ${data.genre} show</p>
+  <p>${data.description}</p>
+</div>`;
+gigArea.innerHTML= template;
+
+}
 
 more.forEach(link =>{
   let id= link.getAttribute('value');
@@ -103,8 +120,9 @@ more.forEach(link =>{
       .then(res =>
        res.json()
       ).then(data =>{
-        console.log(data);
+        renderPost(data)
       })
   })
+
 })
 
