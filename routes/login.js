@@ -3,7 +3,7 @@ var router = express.Router();
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
-var User = require('../models/user');
+//var User = require('../models/user');
 
 // Register 
 router.get('/register', function(req, res) {
@@ -23,7 +23,7 @@ router.post('/register', function(req, res) {
     var password = req.body.password;
     var password2 = req.body.password2;
 
-    // Validation
+    //Validation
     req.assert('name', 'Name is required').notEmpty();
     req.assert('email', 'email is required').notEmpty();
     req.assert('email', 'email is not valid').isEmail();
@@ -38,20 +38,22 @@ router.post('/register', function(req, res) {
             errors: errors
         });
     } else {
+        console.log("to test")
 
-        var newUser = new User({
-            name: name,
-            email: email,
-            username: username,
-            password: password
-        });
+        // var newUser = new User({
+        //     name: name,
+        //     email: email,
+        //     username: username,
+        //     password: password
+        // });
 
-        User.createUser(newUser, function(err, user) {
-            if (err) throw err;
-            console.log(user);
-            req.flash('success_msg', 'you are successfully registered and can now log in');
-            res.redirect('/users/login');
-        });
+        // User.createUser(newUser, function(err, user) {
+        //     if (err) throw err;
+        //     console.log(user);
+        //     req.flash('success_msg', 'you are successfully registered and can now log in');
+        //     res.redirect('/users/login');
+        // });
+        res.end();
     }
 });
 
