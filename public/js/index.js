@@ -3,6 +3,7 @@ var $exampleText = $("#example-text");
 var $exampleDescription = $("#example-description");
 var $submitBtn = $("#submit");
 var $exampleList = $("#example-list");
+var more = document.querySelectorAll('.postContainer a');
 // The API object contains methods for each kind of request we'll make
 var API = {
   saveExample: function(example) {
@@ -92,18 +93,36 @@ var handleDeleteBtnClick = function() {
     refreshExamples();
   });
 };
+function renderPost(data){
+  var gigArea = document.querySelector('#gigArea');
+  const template = `<div id="gigHeader">
+  <h5>${data.title}</h5>
+  <div class="gig stats">
+    <h6>$${data.money} per person</h6>
+    <h6>${data.date}</h6>
+  </div>
+<a class="waves-effect waves-light btn-large"><i class="material-icons left">monetization_on</i>Grab It!</a>
+</div>
+<div id="gigContent">
+<p>We need  ${data.instuments} for a ${data.genre} show</p>
+  <p>${data.description}</p>
+</div>`;
+gigArea.innerHTML= template;
 
-// Add event listeners to the submit and delete buttons
-$submitBtn.on("click", handleFormSubmit);
-$exampleList.on("click", ".delete", handleDeleteBtnClick);
+}
 
+more.forEach(link =>{
+  let id= link.getAttribute('value');
+  console.log(id);
+  link.addEventListener('click', e =>{
+    e.preventDefault();
+    fetch(`api/gigs/${id}`)
+      .then(res =>
+       res.json()
+      ).then(data =>{
+        renderPost(data)
+      })
+  })
 
-
-var editProfile= document.querySelector("#editProfile");
-editProfile.addEventListener('click', (e)=>{
-  e.preventDefault()
-
-  fetch('/profile:id')
 })
 
-var instance = M.FormSelect.getInstance(elem);

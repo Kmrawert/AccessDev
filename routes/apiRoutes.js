@@ -16,12 +16,30 @@ module.exports = function(app) {
       res.json(dbExamples);
     });
   });
+  app.get("/api/gigs/:id", function(req, res) {
+    db.Gigs.findOne({
+      where: {
+        id: req.params.id
+      }
+    }).then(function(post) {
+      res.json(post);
+    });
+  });
 
   // Create a new example
-  app.post("/api/examples", function(req, res) {
-    db.Example.create(req.body).then(function(dbExample) {
-      res.json(dbExample);
-    });
+  app.post("/api/gigs", function(req, res) {
+   const gigs = db.Gigs;
+   const {title, date, location, money, genre, description, instrument}= req.body;
+   if(instrument > 1){
+     let band = instrument.join(', ');
+   }else{
+     band = instrument[0];
+   }
+   gigs.create({title, date, location, money, genre, description, instrument: band }).then(data =>{
+     res.redirect('/');
+     console.log(data);
+
+   })
   });
 
    // Create a new example

@@ -111,3 +111,7 @@ flex-basis: 37.5%;
 #instruments{
   width: 100%;
 }
+.postContainer{
+  width: 100%;
+  border-bottom: 1px solid lightgray;
+}

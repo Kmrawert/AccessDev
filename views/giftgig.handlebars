@@ -1,17 +1,19 @@
 <div id="formContainer">
     <h3>Gift a Gig!</h3>
     <div id="formArea">
-        <form action="/postgig">
+        <form action="/api/gigs" method="POST">
         <label for="Title">title</label>
-            <input type="text" name="fname"><br>
+            <input type="text" name="title"><br>
         <label for="start">Start date:</label>
-       <input type="date" id="start" name="trip-start"
+       <input type="date" id="start" name="date"
        value="YYYY-MM-DD">
         <label for="location">Location</label>
         <input type="text" name="location"><br>
+        <label for="location">Amount Offered:</label>
+        <input type="text" name="money"><br>
         <label>Select Genre</label>
         <label>Browser Select</label>
-        <select class="browser-default">
+        <select class="browser-default" name="genre">
             <option value="" disabled selected>Choose your option</option>
             <option value="funk">Funk</option>
             <option value="randb">R&B</option>
@@ -28,23 +30,27 @@
         <div class="instruments">
         <p>
             <label>
-                <input type="checkbox" value="guitar" />
+                <input name="instrument" type="checkbox" value="guitar" />
                 <span>Guitar</span>
             </label>
             <label>
-                <input type="checkbox" value="Bass"  />
+                <input name="instrument" type="checkbox" value="Bass"  />
                 <span>Bass</span>
             </label>
             <label>
-                <input type="checkbox" value="Keys" />
+                <input name="instrument" type="checkbox" value="Keys" />
                 <span>Keys</span>
             </label>
             <label>
-                <input type="checkbox" value="Drums"  />
+                <input name="instrument" type="checkbox" value="Drums"  />
                 <span>Drums</span>
             </label>
             <label>
-                <input type="checkbox" value="Other"  />
+                <input name="instrument" type="checkbox" value="Vocals"  />
+                <span>Vocals</span>
+            </label>
+            <label>
+                <input name="instrument" type="checkbox" value="Other"  />
                 <span>Other</span>
             </label>
         </p>
@@ -61,8 +67,5 @@
     document.addEventListener('DOMContentLoaded', function() {
   var elems = document.querySelectorAll('select');
   var instances = M.FormSelect.init(elems);
-   var schedule = document.querySelectorAll('.datepicker');
-    var instances2 = M.Datepicker.init(schedule, options);
-  
 });
 </script>
