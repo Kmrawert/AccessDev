@@ -6,17 +6,16 @@ module.exports = function(sequelize, DataTypes) {
         type: DataTypes.STRING,
         allowNull: false,
         validate:{
-            notNull: true,
-            msg: 'Please enter your Instrument(s)'
+            notNull: true
              }
             
-        },   
+        },  
+        image: DataTypes.STRING,
       location: {
         type: DataTypes.STRING,
         allowNull: false,
         validate:{
-            notNull: true,
-            msg: 'Please enter your Location'
+            notNull: true
              }
             
         },   
@@ -47,13 +46,13 @@ module.exports = function(sequelize, DataTypes) {
         }
     });
   
-    Talent.associate = function(models) {
-        // Associating Talent with Posts
-        // When an Talent is deleted, also delete any associated Posts
-        Talent.hasMany(models.Rating, {
-          onDelete: "cascade"
-        });
-      };
+    // Talent.associate = function(models) {
+    //     // Associating Talent with Posts
+    //     // When an Talent is deleted, also delete any associated Posts
+    //     Talent.hasMany(models.Rating, {
+    //       onDelete: "cascade"
+    //     });
+    //   };
   
     return Talent;
   };

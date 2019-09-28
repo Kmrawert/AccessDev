@@ -44,19 +44,25 @@ module.exports = function(app) {
 
    // Create a new example
    app.post("/api/profile", function(req, res) {
-    db.talent.create(req.body).then(function(dbProfile) {
+    const {image,name, location, instrument, bio, YouTubeLinks } = req.body;
+    if(instrument > 1){
+      let band = instrument.join(', ');
+    }else{
+      band = instrument[0];
+    }
+    db.Talent.create({image,name, location, instrument: band, bio, YouTubeLinks}).then(function(dbProfile) {
       res.json(dbProfile);
-      var opts = {
-        file: fs.createReadStream('file.jpg'),
-        wait: true
-     };
-     kraken.upload(opts, function (err, data) {
-        if (err) {
-            console.log('Failed. Error message: %s', err);
-        } else {
-            console.log('Success. Optimized image URL: %s', data.kraked_url);
-        }
-     });
+    //     var opts = {
+    //        file: fs.createReadStream(image),
+    //        wait: true
+    //     };
+    //  kraken.upload(opts, function (err, data) {
+    //     if (err) {
+    //         console.log('Failed. Error message: %s', err);
+    //     } else {
+    //         console.log('Success. Optimized image URL: %s', data.kraked_url);
+    //     }
+    //  });
     });
   });
 
