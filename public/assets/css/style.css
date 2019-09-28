@@ -1,77 +1,140 @@
-<body id="login-body" style="overflow=auto">
-    <div class="wrapper">
-        <div class="container">
-            <div class="row">
-                <div class="col m2"></div>
-                <div class="col m8">
-                    <div id="modal1" class="modal" style="margin-top:-42rem;">
-                        <div class="modal-content" id="error-content">
-                            <h4>Error</h4>
-                        </div>
-                        <div id="error-body">
-                        </div>
-                    </div>
-                    <div class="card-panel solo-card" id="login-card">
-                        <h1 class="pageSubTitle">User Sign-Up</h1>
-                        <form>
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <input id="preferredName" type="text" class="validate b-text">
-                                    <label class="b-text" for="preferredName">Name</label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <input id="email" type="email" class="validate b-text">
-                                    <label class="b-text" for="email">Email</label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <input id="phoneNumber" type="text" class="validate b-text">
-                                    <label class="b-text" for="phoneNumber">Phone Number (optional)</label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <input id="password" type="password" class="validate b-text">
-                                    <label class="b-text" for="password">Password</label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col m4"></div>
-                                <div class="col m4">
-                                    <button id="newUser" class="login-button btn-large bigButton">Submit</button>
-                                </div>
-                                <div class="col m4"></div>
-                            </div>
-                            <div class="row">
-                                <div class="col m4"></div>
-                                <div class="col m4">
-                                    <a href="/login" class="login-button btn-large bigButton">Back</a>
-                                </div>
-                                <div class="col m4"></div>
-                            </div>
-                        </form>
-                    </div>
+@import url('https://fonts.googleapis.com/css?family=ABeeZee|Lato:400,700');
+* {
+    box-sizing: border-box;
+    color: var(brown);
+}
 
-                </div>
-                <div class="col m2"></div>
-            </div>
-        </div>
-    </div>
-    <div class="push"></div>
-    <footer class="page-footer">
-        <div class="footer-copyright">
-            <div class="container">
-                <span class="date-text">© 2019 Copyright</span>
-                <a class="right btn footer-button" href="https://github.com/Kmrawert/AccessDev.git">Github</a>
-            </div>
-        </div>
-    </footer>
-    <script src="https://code.jquery.com/jquery-3.4.0.min.js"
-        integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+:root {
+    --dark-blue: white;
+    --light-blue: #addce4;
+    --yellow: brown;
+    --light-yellow: brown;
+    --darker-blue: #142d4c;
+}
 
-    <script src="/assets/js/login.js"></script>
-</body>
+html,
+body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    font-family: 'Lato', Arial, Helvetica, sans-serif;
+}
+
+#login-body {
+    background-color: var(--white);
+}
+
+#login-card {
+    background-color: var(--light-yellow);
+    color: var(--dark-blue);
+}
+
+.b-text {
+    color: var(--dark-blue) !important;
+}
+
+.login-button {
+    width: 100%;
+    background-color: var(--yellow);
+    color: var(--dark-blue);
+}
+
+.pageTitle {
+    font-family: 'Lato', Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    text-align: center;
+    margin-top: 0;
+    color: var(--light-yellow);
+}
+
+.pageSubTitle {
+    font-family: 'Lato', Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    text-align: center;
+    color: var(--dark-blue);
+}
+
+.link-right a,
+.link-left a {
+    font-size: 1.75rem;
+    text-decoration: none;
+    color: var(--light-yellow);
+    cursor: pointer;
+    transition: .25s;
+}
+
+.link-right a:hover,
+.link-left a:hover {
+    border-bottom: 2px solid var(--light-yellow);
+    padding-bottom: 2px;
+    transition: .25s;
+}
+
+.link-left {
+    float: left;
+}
+
+.link-right {
+    float: right;
+}
+
+.bigButton {
+    width: 100%;
+    height: 50px;
+    background: var(--yellow);
+    color: var(--dark-blue);
+    border-radius: 5px;
+}
+
+.btn-large:hover {
+    color: var(--light-yellow);
+    background-color: var(--dark-blue);
+}
+
+header {
+    background-color: var(--dark-blue);
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+    margin-bottom: 1rem;
+    -webkit-box-shadow: -1px 11px 17px -3px rgba(20, 45, 76, 1);
+    -moz-box-shadow: -1px 11px 17px -3px rgba(20, 45, 76, 1);
+    box-shadow: -1px 11px 17px -3px rgba(20, 45, 76, 1);
+}
+
+::placeholder {
+    color: var(--dark-blue);
+}
+
+.modal,
+.modal-footer {
+    background-color: var(--yellow) !important;
+}
+
+.modal-p {
+    padding: 20px;
+}
+
+footer,
+.footer-copyright,
+.page-footer {
+    background-color: var(--dark-blue);
+    color: var(--light-yellow);
+}
+
+.footer-button {
+    background-color: var(--yellow);
+    color: var(--dark-blue);
+    margin: 4px;
+}
+
+footer,
+.push {
+    height: 100px;
+}
+
+.wrapper {
+    min-height: 100%;
+    margin-bottom: -50px;
+}
