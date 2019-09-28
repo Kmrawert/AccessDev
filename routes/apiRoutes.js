@@ -35,18 +35,26 @@ module.exports = function(app) {
         } else {
             band = instrument[0];
         }
-        gigs.create({ title, date, location, money, genre, description, instrument: band }).then(data => {
-            res.redirect('/');
-            console.log(data);
+        gigs.create({ title, date, location, money, genre, description, instrument: band })
+            .then(data => {
+                res.redirect('/');
+                console.log(data);
 
-        })
+            })
     });
 
     // Sign up route
     app.post("/api/signup", function(req, res) {
         const userData = req.body;
-        res.status(204).end();
         console.log(userData);
+        db.User.create(userData)
+            .then(function() {
+                res.status(204).end();
+
+            })
+            .catch(function(error) {
+                res.status(500).json(error)
+            })
     });
 
     // Create a new example
