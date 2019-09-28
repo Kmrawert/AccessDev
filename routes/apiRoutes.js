@@ -8,6 +8,7 @@ var kraken = new Kraken({
     api_key: password,
     api_secret: krakenAPI
 });
+const secret = "";
 
 module.exports = function(app) {
     // Get all examples
@@ -46,7 +47,10 @@ module.exports = function(app) {
     // Sign up route
     app.post("/api/signup", function(req, res) {
         const userData = req.body;
-        const { name } = req.body;
+        userData.name = userData.name.trim().toLowerCase();
+        userData.email = userData.email.trim().toLowerCase();
+        userData.password = hash(secret, userData.password.trim());
+        // const { name } = req.body;
         console.log(userData);
         db.User.create(userData)
             .then(function() {
@@ -59,8 +63,30 @@ module.exports = function(app) {
             })
     });
 
+    app.post("/api/login", function(req, res) {
+        const userData = req.body;
+
+        userData.email = userData.email.trim().toLowerCase();
+        userData.password = hash(secret, userData.password.trim());
+        res.json(userData);
+        console.log(userData);
+        const token = createToken(userData)
+
+        // here jwy.sign(...)
+        // db.User.create(userData)
+        //     .then(function() {
+        //         // res.cookie('username', name);
+        //         res.status(204).end();
+
+        //     })
+        //     .catch(function(error) {
+        //         res.status(500).json(error)
+        //     })
+    });
+
     // Create a new example
     app.post("/api/profile", function(req, res) {
+
         db.talent.create(req.body).then(function(dbProfile) {
             res.json(dbProfile);
             var opts = {
@@ -84,3 +110,13 @@ module.exports = function(app) {
         });
     });
 };
+
+function hash(secret, text) {
+    return text;
+
+}
+
+
+function createToken(userData) {
+    return 'ghfhgfhgfjhgf'
+}
