@@ -27,23 +27,24 @@ module.exports = function(sequelize, DataTypes) {
             len: [1]
         },
         moneyEarned: {
-            type: DataTypes.DECIMAL(10,2),
+            type: DataTypes.DECIMAL(10, 2),
             allowNull: false,
             defaultValue: 0,
             len: [1]
         },
         bio: {
-          type: DataTypes.STRING,
-          allowNull: true,
-          defaultValue: null,
-          len: [0,250]
-        },    
+            type: DataTypes.STRING,
+            allowNull: true,
+            defaultValue: null,
+            len: [0, 250]
+        },
         YouTubeLinks: {
-          type: DataTypes.STRING,
-          allowNull: true,
-          defaultValue: null,
-          len: [0,500]
-        }
+            type: DataTypes.STRING,
+            allowNull: true,
+            defaultValue: null,
+            len: [0, 500]
+        },
+
     });
   
     // Talent.associate = function(models) {
@@ -55,5 +56,4 @@ module.exports = function(sequelize, DataTypes) {
     //   };
   
     return Talent;
-  };
-  
+};
