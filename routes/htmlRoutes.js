@@ -1,6 +1,8 @@
 var db = require("../models");
+var cookieParser = require('cookie-parser');
 
 module.exports = function(app) {
+    // app.use(cookieParser())
     app.get('/', function(req, res) {
             res.redirect('/home');
         })
@@ -15,7 +17,8 @@ module.exports = function(app) {
         });
     });
     // Load Profile Creation page
-    app.get("/profile/:id", function(req, res) {
+    app.get("/profile", function(req, res) {
+        // console.log(req.cookies);
         res.render("profile", {});
 
     });

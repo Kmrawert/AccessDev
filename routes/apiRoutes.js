@@ -46,9 +46,11 @@ module.exports = function(app) {
     // Sign up route
     app.post("/api/signup", function(req, res) {
         const userData = req.body;
+        const { name } = req.body;
         console.log(userData);
         db.User.create(userData)
             .then(function() {
+                // res.cookie('username', name);
                 res.status(204).end();
 
             })

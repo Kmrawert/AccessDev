@@ -25,9 +25,10 @@ sumbitForm.addEventListener("submit", function(event) {
     // post data to the server
     $.post(url, data, function(error) {
         if (error) {
-            alert(error.message)
+            console.error(error)
         } else {
             console.log("working!!")
+            window.location = '/profile'
         }
     });
 
