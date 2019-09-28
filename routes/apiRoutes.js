@@ -30,9 +30,13 @@ module.exports = function(app) {
   app.post("/api/gigs", function(req, res) {
    const gigs = db.Gigs;
    const {title, date, location, money, genre, description, instrument}= req.body;
-   let band = instrument.join(', ');
-   gigs.create({title, date, location, money, genre, description, instrument: band}).then(data =>{
-     res.json(data);
+   if(instrument > 1){
+     let band = instrument.join(', ');
+   }else{
+     band = instrument[0];
+   }
+   gigs.create({title, date, location, money, genre, description, instrument: band }).then(data =>{
+     res.redirect('/');
      console.log(data);
 
    })
