@@ -51,7 +51,7 @@ module.exports = function(app) {
       band = instrument[0];
     }
     db.Talent.create({image,name, location, instrument: band, bio, YouTubeLinks}).then(function(dbProfile) {
-      res.json(dbProfile);
+      res.json(dbProfile).redirect('/');
     //     var opts = {
     //        file: fs.createReadStream(image),
     //        wait: true
