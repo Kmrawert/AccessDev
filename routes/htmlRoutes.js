@@ -6,11 +6,12 @@ module.exports = function(app) {
   } )
   // Load main content page
   app.get("/home", function(req, res) {
-    db.Example.findAll({}).then(function(dbExamples) {
-      res.render("home", {
-        msg: "Welcome!",
-        examples: dbExamples
-      });
+    db.Gigs.findAll({}).then(function(gigs) {
+      let posts = {
+        gigs: gigs
+      }
+      res.render("home",posts);
+      console.log(posts);
     });
   });
   // Load Profile Creation page

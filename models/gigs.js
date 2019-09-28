@@ -1,22 +1,19 @@
 module.exports = function(sequelize, DataTypes) {
-    var gigs = sequelize.define("gigs", {
-      // Giving the gigs model a name of type STRING
+    var Gigs = sequelize.define("Gigs", {
+      // Giving the Gigs model a name of type STRING
       title: DataTypes.STRING,
       instrument: {
         type: DataTypes.STRING,
         allowNull: false,
         validate:{
-            notNull: true,
-            msg: 'Please enter your Instrument(s)'
-             }
-            
+            notNull: true
+             }     
         },   
       genre: {
         type: DataTypes.STRING,
         allowNull: false,
         validate:{
-            notNull: true,
-            msg: 'Please enter your genre'
+            notNull: true
              }
             
         },   
@@ -24,16 +21,14 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.DATEONLY,
             allowNull: false,
             validate:{
-                notNull: true,
-                msg: 'Please enter a date'
+                notNull: true
             }        
         },
       location: {
         type: DataTypes.STRING,
         allowNull: false,
         validate:{
-            notNull: true,
-            msg: 'Please enter your Location'
+            notNull: true
              }
             
         },   
@@ -54,16 +49,16 @@ module.exports = function(sequelize, DataTypes) {
 
     });
   
-    gigs.associate = function(models) {
-        // Associating gigs with Posts
-        // When an gigs is deleted, also delete any associated Posts
-        gigs.belongsTo(models.Talent, {
-            foreignKey: {
-              allowNull: false
-            }
-          });
-      };
+    // Gigs.associate = function(models) {
+    //     // Associating Gigs with Gigs
+    //     // When an Gigs is deleted, also delete any associated Gigs
+    //     Gigs.belongsTo(models.Talent, {
+    //         foreignKey: {
+    //           allowNull: false
+    //         }
+    //       });
+    //   };
   
-    return gigs;
+    return Gigs;
   };
   
