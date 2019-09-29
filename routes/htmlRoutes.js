@@ -2,9 +2,29 @@ var db = require("../models");
 var cookieParser = require('cookie-parser');
 
 module.exports = function(app) {
+    app.get("/login", function(req, res) {
+        res.render("login", {});
+    });
+    
+    // Sign up page 
+    app.get("/signup", function(req, res) {
+        res.render("signup", {});
+    })
+
+
+    // app.use((req,res,next)=>{
+    //     try {
+    //         var decoded = jwt.verify(token, 'grabbygig');
+    //         console.log(decoded.foo) ;
+    //       } catch(err) {
+    //         next(err)
+    //       }
+           
+
+    // })
     // app.use(cookieParser())
     app.get('/', function(req, res) {
-            res.redirect('/home');
+        res.redirect('/home');
         })
         // Load main content page
     app.get("/home", function(req, res) {
@@ -28,14 +48,6 @@ module.exports = function(app) {
     });
 
     // Login page
-    app.get("/login", function(req, res) {
-        res.render("login", {});
-    });
-
-    // Sign up page 
-    app.get("/signup", function(req, res) {
-        res.render("signup", {});
-    })
 
     // Load example page and pass in an example by id
     app.get("/example/:id", function(req, res) {

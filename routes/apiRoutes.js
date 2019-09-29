@@ -2,6 +2,8 @@ require("dotenv").config();
 var Kraken = require('kraken'),
     fs = require('fs');
 var db = require("../models");
+let token;
+var jwt = require('jsonwebtoken');
 var password = process.env.krakenAPI_Secret;
 var krakenAPI = process.env.krakenAPI_Key;
 var kraken = new Kraken({
@@ -9,19 +11,23 @@ var kraken = new Kraken({
     api_secret: krakenAPI
 });
 
-<<<<<<< HEAD
 module.exports = function (app) {
-=======
-const secret = "";
-
-module.exports = function(app) {
->>>>>>> 280e7109da04b27b4c0834e4dfbaa721a8e94d8c
     // Get all examples
-    app.get("/api/examples", function (req, res) {
-        db.Example.findAll({}).then(function (dbExamples) {
-            res.json(dbExamples);
+        app.post("/api/signup", function (req, res) {
+            const userData = req.body;
+            const { name } = req.body;
+            console.log(userData);
+            db.User.create(userData)
+                .then(function () {
+                    // res.cookie('username', name);
+                    res.status(204).end();
+    
+                })
+                .catch(function (error) {
+                    res.status(500).json(error)
+                })
         });
-    });
+      
     app.get("/api/gigs/:id", function (req, res) {
         db.Gigs.findOne({
             where: {
@@ -48,54 +54,19 @@ module.exports = function(app) {
         })
     });
 
-<<<<<<< HEAD
     // Sign up route
-    app.post("/api/signup", function (req, res) {
-=======
-    // Create a new user
-    app.post("/api/signup", function(req, res) {
->>>>>>> 280e7109da04b27b4c0834e4dfbaa721a8e94d8c
-        const userData = req.body;
-        userData.name = userData.name.trim().toLowerCase();
-        userData.email = userData.email.trim().toLowerCase();
-        userData.password = hash(secret, userData.password.trim());
-        // const { name } = req.body;
-        console.log(userData);
-        db.User.create(userData)
-            .then(function () {
-                // res.cookie('username', name);
-                res.status(204).end();
-
-            })
-            .catch(function (error) {
-                res.status(500).json(error)
-            })
-    });
-
-    // login existing user
-    app.post("/api/login", function(req, res) {
-        const userData = req.body;
-
-        userData.email = userData.email.trim().toLowerCase();
-        userData.password = hash(secret, userData.password.trim());
-        res.json(userData);
-        console.log(userData);
-        const token = createToken(userData)
-
-        // here jwy.sign(...)
-        // db.User.create(userData)
-        //     .then(function() {
-        //         // res.cookie('username', name);
-        //         res.status(204).end();
-
-        //     })
-        //     .catch(function(error) {
-        //         res.status(500).json(error)
-        //     })
-    });
-
+    app.post("/api/login", (req,res) =>{
+        let {email, password} = req.body;
+        let userData = {
+            email: email.trim().toLowerCase(),
+            password: password.trim()
+            }
+        // token = jwt.sign({ email: userData.email }, 'grabbygig');
+        res.status(204).end();
+        })
+     
+        
     // Create a new example
-<<<<<<< HEAD
     app.post("/api/profile", function (req, res) {
         const { image, name, location, instrument, bio, YouTubeLinks } = req.body;
         if (instrument > 1) {
@@ -105,23 +76,6 @@ module.exports = function(app) {
         }
         db.Talent.create({ image, name, location, instrument: band, bio, YouTubeLinks }).then(function (dbProfile) {
             res.redirect('/home');
-=======
-    app.post("/api/profile", function(req, res) {
-
-        db.talent.create(req.body).then(function(dbProfile) {
-            res.json(dbProfile);
-            var opts = {
-                file: fs.createReadStream('file.jpg'),
-                wait: true
-            };
-            kraken.upload(opts, function(err, data) {
-                if (err) {
-                    console.log('Failed. Error message: %s', err);
-                } else {
-                    console.log('Success. Optimized image URL: %s', data.kraked_url);
-                }
-            });
->>>>>>> 280e7109da04b27b4c0834e4dfbaa721a8e94d8c
         });
     });
 
@@ -133,11 +87,5 @@ module.exports = function(app) {
     });
 };
 
-function hash(secret, text) {
-    return text;
 
-}
 
-function createToken(userData) {
-    return 'ghfhgfhgfjhgf'
-}
