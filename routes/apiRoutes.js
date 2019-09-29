@@ -8,6 +8,7 @@ var kraken = new Kraken({
     api_key: password,
     api_secret: krakenAPI
 });
+
 const secret = "";
 
 module.exports = function(app) {
@@ -44,7 +45,7 @@ module.exports = function(app) {
             })
     });
 
-    // Sign up route
+    // Create a new user
     app.post("/api/signup", function(req, res) {
         const userData = req.body;
         userData.name = userData.name.trim().toLowerCase();
@@ -63,6 +64,7 @@ module.exports = function(app) {
             })
     });
 
+    // login existing user
     app.post("/api/login", function(req, res) {
         const userData = req.body;
 
@@ -115,7 +117,6 @@ function hash(secret, text) {
     return text;
 
 }
-
 
 function createToken(userData) {
     return 'ghfhgfhgfjhgf'

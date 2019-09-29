@@ -11,11 +11,8 @@ loginForm.addEventListener("submit", function(event) {
     console.log(email.value, password.value);
 
     const data = {
-
         email: email.value,
         password: password.value,
-
-
     }
     const url = "/api/login"
 
@@ -24,7 +21,7 @@ loginForm.addEventListener("submit", function(event) {
         if (error) {
             console.error(error)
         } else {
-            console.log("working!!")
+            console.log("it's login in")
             window.location = '/home'
         }
     });

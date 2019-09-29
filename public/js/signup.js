@@ -3,7 +3,7 @@ console.log(sumbitForm);
 
 sumbitForm.addEventListener("submit", function(event) {
     event.preventDefault();
-    console.log('yeah working')
+    console.log("it's signing up")
 
     // get the inputs
 
@@ -27,7 +27,7 @@ sumbitForm.addEventListener("submit", function(event) {
         if (error) {
             console.error(error)
         } else {
-            console.log("working!!")
+            console.log("it's signing up")
             window.location = '/profile'
         }
     });
