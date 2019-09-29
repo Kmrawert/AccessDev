@@ -22,8 +22,17 @@ loginForm.addEventListener("submit", function(event) {
             console.error(error)
         } else {
             console.log("it's login in")
-            window.location = '/home'
+            window.location = '/'
         }
     });
 
 });
+
+
+// fix the route for login -->goes home page
+
+// logic if the user exist in db than go Home page
+
+// Sign up logic - user needs to fill out all required field to sign up
+
+// Logout function

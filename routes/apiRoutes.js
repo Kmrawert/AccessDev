@@ -67,12 +67,21 @@ module.exports = function(app) {
     // login existing user
     app.post("/api/login", function(req, res) {
         const userData = req.body;
-
         userData.email = userData.email.trim().toLowerCase();
         userData.password = hash(secret, userData.password.trim());
         res.json(userData);
         console.log(userData);
-        const token = createToken(userData)
+        //const token = createToken(userData)
+
+        db.User.get(userData)
+            .then(function() {
+                // res.cookie('username', name);
+                res.status(200).end();
+
+            })
+            .catch(function(error) {
+                res.status(500).json(error)
+            })
 
         // here jwy.sign(...)
         // db.User.create(userData)
