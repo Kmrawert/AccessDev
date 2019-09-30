@@ -13,7 +13,7 @@ var kraken = new Kraken({
 
 module.exports = function (app) {
     // Get all examples
-        app.post("/api/signup", function (req, res) {
+        app.post("/api/signup", checktoken, function (req, res) {
             const userData = req.body;
             const { name } = req.body;
             console.log(userData);
