@@ -79,8 +79,8 @@ module.exports = function(app) {
         userData.email = userData.email.trim().toLowerCase();
         userData.password = hash(userData.password.trim());
         console.log(userData);
-        //const token = createToken(userData)
 
+        //const token = createToken(userData)
         db.User.findOne({ where: { email: userData.email } })
             .then(function(userResponce) {
                 if (userResponce === null) {
@@ -145,7 +145,7 @@ module.exports = function(app) {
 const createHash = require('crypto').createHash
 
 
-// hash a string using sha256
+// hash password using sha256
 function hash(str) {
     const hash = createHash('sha256')
     hash.update(str)
