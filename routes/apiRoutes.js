@@ -50,29 +50,58 @@ module.exports = function(app) {
         const userData = req.body;
         userData.name = userData.name.trim().toLowerCase();
         userData.email = userData.email.trim().toLowerCase();
-        userData.password = hash(secret, userData.password.trim());
+        // hashing the password
+        userData.password = hash(userData.password.trim());
         // const { name } = req.body;
         console.log(userData);
-        db.User.create(userData)
+        db.User.findOne({ where: { email: userData.email } })
+            .then(function(userResponce) {
+                if (userResponce !== null) {
+                    throw new Error("This user already exist!")
+                }
+                return db.User.create(userData)
+            })
             .then(function() {
                 // res.cookie('username', name);
                 res.status(204).end();
 
-            })
-            .catch(function(error) {
-                res.status(500).json(error)
+            }).catch(function(error) {
+                console.log("login error", error)
+                res.status(500).json({
+                    message: error.message
+                })
             })
     });
 
     // login existing user
     app.post("/api/login", function(req, res) {
         const userData = req.body;
-
         userData.email = userData.email.trim().toLowerCase();
-        userData.password = hash(secret, userData.password.trim());
-        res.json(userData);
+        userData.password = hash(userData.password.trim());
         console.log(userData);
-        const token = createToken(userData)
+
+        //const token = createToken(userData)
+        db.User.findOne({ where: { email: userData.email } })
+            .then(function(userResponce) {
+                if (userResponce === null) {
+                    throw new Error("user is not found")
+                }
+                console.log("keep on eye", userResponce)
+                    // function that compares password  
+                comparePassword(userResponce.dataValues.password, userData.password);
+                const token = createToken(userResponce.dataValues);
+                res.status(200).json({
+                    token: token,
+                    userData: userResponce.dataValues
+                });
+
+            })
+            .catch(function(error) {
+                console.log("login error", error)
+                res.status(500).json({
+                    message: error.message
+                })
+            })
 
         // here jwy.sign(...)
         // db.User.create(userData)
@@ -113,11 +142,24 @@ module.exports = function(app) {
     });
 };
 
-function hash(secret, text) {
-    return text;
+const createHash = require('crypto').createHash
 
+
+// hash password using sha256
+function hash(str) {
+    const hash = createHash('sha256')
+    hash.update(str)
+    return hash.digest('hex')
 }
 
+// create a session token
 function createToken(userData) {
     return 'ghfhgfhgfjhgf'
 }
+
+// function that compares password 
+function comparePassword(originalPassword, password) {
+    if (originalPassword !== password) {
+        throw new Error("Invalid credentials")
+    }
+};

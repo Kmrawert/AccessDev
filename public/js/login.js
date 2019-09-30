@@ -1,3 +1,5 @@
+//import { json } from "sequelize/types";
+
 var loginForm = document.getElementById("login-form");
 console.log(loginForm);
 
@@ -16,14 +18,21 @@ loginForm.addEventListener("submit", function(event) {
     }
     const url = "/api/login"
 
-    // post data to the server
-    $.post(url, data, function(error) {
-        if (error) {
-            console.error(error)
-        } else {
-            console.log("it's login in")
-            window.location = '/home'
-        }
-    });
+    // ajax call to post data to the server
+    $.post(url, data, function(res) {
+        console.log("it's login in", res)
+            // fix the route for login --> goes home page
 
+        window.localStorage.setItem("token", res.token)
+        window.location = '/home'
+
+
+    }).fail(function(error) {
+        console.log(error)
+        alert(error.responseJSON.message);
+    })
 });
+
+//TO DO
+// implement log out functionality
+// token session

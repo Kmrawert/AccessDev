@@ -23,13 +23,13 @@ sumbitForm.addEventListener("submit", function(event) {
     const url = "/api/signup"
 
     // post data to the server
-    $.post(url, data, function(error) {
-        if (error) {
-            console.error(error)
-        } else {
-            console.log("it's signing up")
-            window.location = '/profile'
-        }
-    });
+    $.post(url, data, function() {
 
+        console.log("it's signing up")
+        window.location = '/profile'
+
+    }).fail(function(error) {
+        console.log(error)
+        alert(error.responseJSON.message);
+    })
 });
