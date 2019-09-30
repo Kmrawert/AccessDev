@@ -1,4 +1,4 @@
-const apikey =;
+const apikey;
 var fileInput = document.querySelector('#fileInput');
 const linkName = document.querySelector('#linkName');
 const client = filestack.init(apikey);
