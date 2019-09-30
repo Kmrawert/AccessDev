@@ -54,7 +54,13 @@ module.exports = function(app) {
         userData.password = hash(userData.password.trim());
         // const { name } = req.body;
         console.log(userData);
-        db.User.create(userData)
+        db.User.findOne({ where: { email: userData.email } })
+            .then(function(userResponce) {
+                if (userResponce !== null) {
+                    throw new Error("This user already exist!")
+                }
+                return db.User.create(userData)
+            })
             .then(function() {
                 // res.cookie('username', name);
                 res.status(204).end();
