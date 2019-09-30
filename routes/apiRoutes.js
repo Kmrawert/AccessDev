@@ -2,8 +2,8 @@ require("dotenv").config();
 var Kraken = require('kraken'),
     fs = require('fs');
 var db = require("../models");
-let token;
 var jwt = require('jsonwebtoken');
+let token;
 var password = process.env.krakenAPI_Secret;
 var krakenAPI = process.env.krakenAPI_Key;
 var kraken = new Kraken({
@@ -19,7 +19,6 @@ module.exports = function (app) {
             console.log(userData);
             db.User.create(userData)
                 .then(function () {
-                    // res.cookie('username', name);
                     res.status(204).end();
     
                 })
@@ -60,9 +59,9 @@ module.exports = function (app) {
         let userData = {
             email: email.trim().toLowerCase(),
             password: password.trim()
-            }
-        // token = jwt.sign({ email: userData.email }, 'grabbygig');
-        res.status(204).end();
+        }
+        token = jwt.sign({ email: userData.email }, 'grabbygig');
+        res.cookie('token', token).status(204).end();
         })
      
         

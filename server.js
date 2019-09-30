@@ -1,5 +1,8 @@
 require("dotenv").config();
+var cookieParser = require('cookie-parser');
 var express = require("express");
+var jwt = require('jsonwebtoken');
+
 var exphbs = require("express-handlebars");
 
 var db = require("./models");
@@ -9,6 +12,7 @@ var PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
 app.use(express.json());
 app.use(express.static("public"));
 
@@ -20,10 +24,10 @@ app.engine(
     })
 );
 app.set("view engine", "handlebars");
-
 // Routes
 require("./routes/apiRoutes")(app);
 require("./routes/htmlRoutes")(app);
+
 
 var syncOptions = { force: false };
 

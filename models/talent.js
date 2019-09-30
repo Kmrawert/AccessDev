@@ -46,6 +46,15 @@ module.exports = function(sequelize, DataTypes) {
         },
 
     });
+    Talent.associate = function(models) {
+      // Associating Talent with Posts
+      // When an Talent is deleted, also delete any associated Posts
+      Talent.belongsTo(models.User, {
+        foreignKey: {
+          allowNull: false
+        }
+      });
+    };
   
     // Talent.associate = function(models) {
     //     // Associating Talent with Posts

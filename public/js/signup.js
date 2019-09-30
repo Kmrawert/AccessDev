@@ -28,7 +28,7 @@ sumbitForm.addEventListener("submit", function(event) {
             console.error(error)
         } else {
             console.log("it's signing up")
-            window.location = '/profile'
+            window.location = '/login'
         }
     });
 
