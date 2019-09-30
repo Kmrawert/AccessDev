@@ -33,10 +33,6 @@ loginForm.addEventListener("submit", function(event) {
     })
 });
 
-
-// logic if the user exist in db than go Home page
-// user login if exist in DB and password match
-
-// Sign up logic - user needs to fill out all required field to sign up
-
-//
+//TO DO
+// implement log out functionality
+// token session

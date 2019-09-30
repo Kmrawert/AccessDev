@@ -28,7 +28,8 @@ sumbitForm.addEventListener("submit", function(event) {
         console.log("it's signing up")
         window.location = '/profile'
 
-    }).fail(function() {
-        alert("server is not responding");
+    }).fail(function(error) {
+        console.log(error)
+        alert(error.responseJSON.message);
     })
 });

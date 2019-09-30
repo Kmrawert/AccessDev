@@ -65,9 +65,11 @@ module.exports = function(app) {
                 // res.cookie('username', name);
                 res.status(204).end();
 
-            })
-            .catch(function(error) {
-                res.status(500).json(error)
+            }).catch(function(error) {
+                console.log("login error", error)
+                res.status(500).json({
+                    message: error.message
+                })
             })
     });
 
