@@ -1,5 +1,4 @@
 var db = require("../models");
-var cookieParser = require('cookie-parser');
 
 module.exports = function(app) {
     app.get("/login", function(req, res) {

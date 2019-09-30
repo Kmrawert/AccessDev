@@ -74,6 +74,7 @@ module.exports = function (app) {
         } else {
             band = instrument[0];
         }
+        console.log(image);
         db.Talent.create({ image, name, location, instrument: band, bio, YouTubeLinks }).then(function (dbProfile) {
             res.redirect('/home');
         });

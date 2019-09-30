@@ -4,8 +4,9 @@
         <label for="Name">Name:</label>
             <input type="text" name="name"><br>
         <label for="proImage">Profile Image:</label><br>
-             <input name = "image" type="file"
+             <input id="fileInput"  type="file"
        accept="image/png, image/jpeg">
+       <input id= "linkName" name = "image" type="text">
         <label for="location">Location:</label>
             <input type="text" name="location"><br>
         <label for="briefBio">Brief Bio:</label>
@@ -40,6 +41,7 @@
         </form>
     </div>
 </div>
+<script src="/js/profile.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         var elems3 = document.querySelectorAll('select');
