@@ -1,36 +1,39 @@
 <div id="formContainer">
     <div id="formArea">
-        <form action="/profile">
+        <form action="/api/profile" method = "POST">
         <label for="Name">Name:</label>
-            <input type="text" name="fname"><br>
+            <input id="profilename" type="text"  name="name"><br>
         <label for="proImage">Profile Image:</label><br>
-             
+             <input id="fileInput"  type="file"
+       accept="image/png, image/jpeg">
+       <input id= "linkName" name = "image" type="text">
+       <input id= "UserId" name = "UserId" type="text">
         <label for="location">Location:</label>
             <input type="text" name="location"><br>
         <label for="briefBio">Brief Bio:</label>
-           <textarea name="briefBio" id="briefBio"></textarea>
+           <textarea name="bio" id="briefBio"></textarea>
         <label for="YTLinks">YouTube Link:</label>
-           <textarea name="YTLinks" id="YTLinks"></textarea>
+           <textarea name="YouTubeLinks" id="YTLinks"></textarea>
         <label for="start">Instrument:</label>
             <p>
             <label>
-                <input type="checkbox" value="guitar" />
+                <input name="instrument" type="checkbox" value="guitar" />
                 <span>Guitar</span>
             </label>
             <label>
-                <input type="checkbox" value="Bass"  />
+                <input name="instrument" type="checkbox" value="Bass"  />
                 <span>Bass</span>
             </label>
             <label>
-                <input type="checkbox" value="Keys" />
+                <input name="instrument" type="checkbox" value="Keys" />
                 <span>Keys</span>
             </label>
             <label>
-                <input type="checkbox" value="Drums"  />
+                <input name="instrument" type="checkbox" value="Drums"  />
                 <span>Drums</span>
             </label>
             <label>
-                <input type="checkbox" value="Other"  />
+                <input name="instrument" type="checkbox" value="Other"  />
                 <span>Other</span>
             </label>
         </p>
@@ -39,6 +42,7 @@
         </form>
     </div>
 </div>
+<script src="/js/profile.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         var elems3 = document.querySelectorAll('select');

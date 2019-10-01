@@ -11,7 +11,7 @@ sumbitForm.addEventListener("submit", function(event) {
     const email = document.getElementById("email");
     const phoneNumber = document.getElementById("phoneNumber");
     const password = document.getElementById("password");
-    console.log(preferredName.value, email.value, phoneNumber.value, password.value);
+    // console.log(preferredName.value, email.value, phoneNumber.value, password.value);
 
     const data = {
         name: preferredName.value,
@@ -23,9 +23,11 @@ sumbitForm.addEventListener("submit", function(event) {
     const url = "/api/signup"
 
     // post data to the server
-    $.post(url, data, function() {
+    $.post(url, data, function(res) {
 
         console.log("it's signing up")
+        console.log(res);
+        window.localStorage.setItem("UserData", JSON.stringify(res));
         window.location = '/profile'
 
     }).fail(function(error) {
