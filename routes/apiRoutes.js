@@ -124,13 +124,13 @@ module.exports = function(app) {
                 file: fs.createReadStream('file.jpg'),
                 wait: true
             };
-            kraken.upload(opts, function(err, data) {
-                if (err) {
-                    console.log('Failed. Error message: %s', err);
-                } else {
-                    console.log('Success. Optimized image URL: %s', data.kraked_url);
-                }
-            });
+            // kraken.upload(opts, function(err, data) {
+            //     if (err) {
+            //         console.log('Failed. Error message: %s', err);
+            //     } else {
+            //         console.log('Success. Optimized image URL: %s', data.kraked_url);
+            //     }
+            // });
         });
     });
 
@@ -138,6 +138,11 @@ module.exports = function(app) {
     app.delete("/api/examples/:id", function(req, res) {
         db.Example.destroy({ where: { id: req.params.id } }).then(function(dbExample) {
             res.json(dbExample);
+        });
+    });
+    app.get("/api/editprofile/:id", function(req, res) {
+        db.talent.findOne({}).then(function(dbEditProfile) {
+            res.json(dbEditProfile);
         });
     });
 };

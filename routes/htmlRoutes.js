@@ -22,6 +22,12 @@ module.exports = function(app) {
         res.render("profile", {});
 
     });
+
+    app.get("/editprofile", function(req, res) {
+        // console.log(req.cookies);
+        res.render("editprofile", {});
+
+    });
     app.get("/giftgig", function(req, res) {
         res.render("giftgig", {});
 
