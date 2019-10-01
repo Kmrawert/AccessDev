@@ -1,4 +1,4 @@
-//require("dotenv").config();
+require("dotenv").config();
 var Kraken = require('kraken'),
     fs = require('fs');
 var db = require("../models");
