@@ -77,7 +77,7 @@ module.exports = function (app) {
         const userData = req.body;
         userData.email = userData.email.trim().toLowerCase();
         userData.password = hash(userData.password.trim());
-        console.log(userData);
+        console.log(userData.password);
 
         //const token = createToken(userData)
         db.User.findOne({ where: { email: userData.email } })

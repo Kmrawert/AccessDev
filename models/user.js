@@ -32,12 +32,16 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: true,
         },
-            image: DataTypes.STRING,
+        image: DataTypes.STRING,
           location: {
             type: DataTypes.STRING,
             allowNull: true,        
             },   
-            rating: DataTypes.DECIMAL(10,2),
+            rating: {
+                type: DataTypes.DECIMAL(10,2),
+                allowNull: false,
+                defaultValue: 5.0,
+            },
             numberofGigs: {
                 type: DataTypes.INTEGER,
                 allowNull: false,

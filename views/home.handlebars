@@ -2,22 +2,22 @@
     <div id="profileWrapper">
       <div id="profileArea">
         <h3>Welcome Back!</h3>
-        <img id="profilePic"src="https://upload.wikimedia.org/wikipedia/commons/9/9c/Jay-Z_%40_Shawn_%27Jay-Z%27_Carter_Foundation_Carnival_%28crop_2%29.jpg" alt="profilePic">
-        <h5>name goes here</h5>
+        <img id="profilePic"src={{user.image}} alt="profilePic">
+        <h5>{{user.name}}</h5>
       <div class="stats">
         <i class="material-icons star">star</i>
-        <h5>4.9</h5>
+        <h5>{{user.rating}}</h5>
         </div> 
       <div class="stats">
-        <h6>Artist / Producer</h6>
+        <h6>{{user.instrument}}</h6>
         </div> 
       <div class="stats">
         <h6>number of gigs grabbed: </h6>
-        <h6>49</h6>
+        <h6>{{user.numberofGigs}}</h6>
         </div> 
       <div class="stats">
         <h6>Money grabbed: </h6>
-        <h6>$1,000,000,000</h6>
+        <h6>${{user.moneyEarned}}</h6>
         </div> 
         <div class="stats profileButtons">
         <a class="waves-effect waves-light btn-large" href="/giftgig">Give A gig</a>
