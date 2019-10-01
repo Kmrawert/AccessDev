@@ -1,26 +1,25 @@
 module.exports = function(sequelize, DataTypes) {
     var Talent = sequelize.define("Talent", {
-        // Giving the Talent model a name of type STRING
-        name: DataTypes.STRING,
-        instrument: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            validate: {
-                notNull: true,
-                msg: 'Please enter your Instrument(s)'
-            }
-
-        },
-        location: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            validate: {
-                notNull: true,
-                msg: 'Please enter your Location'
-            }
-
-        },
-        rating: DataTypes.DECIMAL(10, 2),
+      // Giving the Talent model a name of type STRING
+      name: DataTypes.STRING,
+      instrument: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate:{
+            notNull: true
+             }
+            
+        },  
+        image: DataTypes.STRING,
+      location: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate:{
+            notNull: true
+             }
+            
+        },   
+        rating: DataTypes.DECIMAL(10,2),
         numberofGigs: {
             type: DataTypes.INTEGER,
             allowNull: false,
@@ -47,14 +46,23 @@ module.exports = function(sequelize, DataTypes) {
         },
 
     });
-
     Talent.associate = function(models) {
-        // Associating Talent with Posts
-        // When an Talent is deleted, also delete any associated Posts
-        Talent.hasMany(models.Rating, {
-            onDelete: "cascade"
-        });
+      // Associating Talent with Posts
+      // When an Talent is deleted, also delete any associated Posts
+      Talent.belongsTo(models.User, {
+        foreignKey: {
+          allowNull: false
+        }
+      });
     };
-
+  
+    // Talent.associate = function(models) {
+    //     // Associating Talent with Posts
+    //     // When an Talent is deleted, also delete any associated Posts
+    //     Talent.hasMany(models.Rating, {
+    //       onDelete: "cascade"
+    //     });
+    //   };
+  
     return Talent;
 };
