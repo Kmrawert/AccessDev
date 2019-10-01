@@ -115,6 +115,7 @@ flex-basis: 37.5%;
   width: 100%;
   border-bottom: 1px solid lightgray;
 }
-#linkName{
+#linkName,
+#UserId{
   display:none;
 }

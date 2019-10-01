@@ -1,7 +1,18 @@
-const apikey =;
+const apikey = 'AFeiQyudCRNK8T2g46sKFz';
 var fileInput = document.querySelector('#fileInput');
 const linkName = document.querySelector('#linkName');
+const name = document.querySelector('#profilename');
+const UserId = document.querySelector('#UserId');
+
 const client = filestack.init(apikey);
+
+
+let UserData = window.localStorage.getItem('UserData');
+let ParseData  = JSON.parse(UserData);
+console.log(ParseData);
+name.value= ParseData.name;
+UserId = ParseData.id;
+
 
 fileInput.addEventListener('change', (event) => {
   const files = event.target.files;

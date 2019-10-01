@@ -1,4 +1,5 @@
 require("dotenv").config();
+const apikey = 'AFeiQyudCRNK8T2g46sKFz';
 var Kraken = require('kraken'),
     fs = require('fs');
 var db = require("../models");
@@ -12,21 +13,7 @@ var kraken = new Kraken({
 });
 
 module.exports = function (app) {
-    // Get all examples
-        app.post("/api/signup", checktoken, function (req, res) {
-            const userData = req.body;
-            const { name } = req.body;
-            console.log(userData);
-            db.User.create(userData)
-                .then(function () {
-                    res.status(204).end();
-    
-                })
-                .catch(function (error) {
-                    res.status(500).json(error)
-                })
-        });
-      
+    // Get all examples      
     app.get("/api/gigs/:id", function (req, res) {
         db.Gigs.findOne({
             where: {
@@ -55,26 +42,29 @@ module.exports = function (app) {
     });
 
     // Create a new user
-    app.post("/api/signup", function(req, res) {
+    app.post("/api/signup", function (req, res) {
         const userData = req.body;
         userData.name = userData.name.trim().toLowerCase();
         userData.email = userData.email.trim().toLowerCase();
         // hashing the password
         userData.password = hash(userData.password.trim());
         // const { name } = req.body;
-        console.log(userData);
+        // console.log(userData);
         db.User.findOne({ where: { email: userData.email } })
-            .then(function(userResponce) {
+            .then(function (userResponce) {
                 if (userResponce !== null) {
                     throw new Error("This user already exist!")
                 }
+
                 return db.User.create(userData)
             })
-            .then(function() {
-                // res.cookie('username', name);
-                res.status(204).end();
+            .then(function (data) {
+                console.log('user', data);
+               
+                res.json(data.dataValues);
 
-            }).catch(function(error) {
+            })
+            .catch(function (error) {
                 console.log("login error", error)
                 res.status(500).json({
                     message: error.message
@@ -83,7 +73,7 @@ module.exports = function (app) {
     });
 
     // login existing user
-    app.post("/api/login", function(req, res) {
+    app.post("/api/login", function (req, res) {
         const userData = req.body;
         userData.email = userData.email.trim().toLowerCase();
         userData.password = hash(userData.password.trim());
@@ -91,18 +81,18 @@ module.exports = function (app) {
 
         //const token = createToken(userData)
         db.User.findOne({ where: { email: userData.email } })
-            .then(function(userResponce) {
+            .then(function (userResponce) {
                 if (userResponce === null) {
                     throw new Error("user is not found")
                 }
                 console.log("keep on eye", userResponce)
-                    // function that compares password  
+                // function that compares password  
                 comparePassword(userResponce.dataValues.password, userData.password);
-                token = jwt.sign({ email: userData.email }, 'grabbygig');
+                token = jwt.sign({ email: userResponce.email }, 'grabbygig');
                 res.cookie('token', token).status(204).end();
 
             })
-            .catch(function(error) {
+            .catch(function (error) {
                 console.log("login error", error)
                 res.status(500).json({
                     message: error.message
@@ -111,27 +101,18 @@ module.exports = function (app) {
 
     });
 
-    // Sign up route
-    app.post("/api/login", (req,res) =>{
-        let {email, password} = req.body;
-        let userData = {
-            email: email.trim().toLowerCase(),
-            password: password.trim()
-        }
-       
-        })
-     
-        
+
+
     // Create a new example
     app.post("/api/profile", function (req, res) {
-        const { image, name, location, instrument, bio, YouTubeLinks } = req.body;
+        const { image, name, location, instrument, bio, YouTubeLinks, UserId } = req.body;
         if (instrument > 1) {
             let band = instrument.join(', ');
         } else {
             band = instrument[0];
         }
         console.log(image);
-        db.Talent.create({ image, name, location, instrument: band, bio, YouTubeLinks }).then(function (dbProfile) {
+        db.Talent.create({ image, name, location, instrument: band, bio, YouTubeLinks, UserId }).then(function (dbProfile) {
             res.redirect('/home');
         });
     });
