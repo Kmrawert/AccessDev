@@ -4,6 +4,8 @@ var $exampleDescription = $("#example-description");
 var $submitBtn = $("#submit");
 var $exampleList = $("#example-list");
 var more = document.querySelectorAll('.postContainer a');
+
+
 // The API object contains methods for each kind of request we'll make
 
 
@@ -17,7 +19,7 @@ function renderPost(data){
     <h6>$${data.money} per person</h6>
     <h6>${data.date}</h6>
   </div>
-<a class="waves-effect waves-light btn-large"><i class="material-icons left">monetization_on</i>Grab It!</a>
+<a class="grabGig waves-effect waves-light btn-large " UserId= ${data.UserId}><i class="material-icons left">monetization_on</i>Grab It!</a>
 </div>
 <div id="gigContent">
 <p>We need  ${data.instuments} for a ${data.genre} show</p>
@@ -37,6 +39,14 @@ more.forEach(link =>{
        res.json()
       ).then(data =>{
         renderPost(data)
+      }).finally(data => {
+        var button = document.querySelector('.grabGig');
+        button.addEventListener('click', e => {
+          e.preventDefault();
+          console.log('click');
+    
+        })
+
       })
   })
 
