@@ -141,11 +141,6 @@ function hash(str) {
     return hash.digest('hex')
 }
 
-// create a session token
-function createToken(userData) {
-    return 'ghfhgfhgfjhgf'
-}
-
 // function that compares password 
 function comparePassword(originalPassword, password) {
     if (originalPassword !== password) {
