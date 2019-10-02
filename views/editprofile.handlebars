@@ -1,21 +1,34 @@
 <div id="formContainer">
+    <h2>Edit Profile</h2>
     <div id="formArea">
-        <form action="/api/profile" method = "POST">
+        <form action="/profile">
         <label for="Name">Name:</label>
-            <input id="profilename" type="text"  name="name"><br>
+            <input type="text" name="fname"><br>
         <label for="proImage">Profile Image:</label><br>
-
-             <input id="fileInput"  type="file"
-       accept="image/png, image/jpeg">
-       <input id= "linkName" name = "image" type="text">
-       <input id= "UserId" name = "UserId" type="text">
-
+        <label for="type">Are you a:</label>
+            <p>
+            <label>
+                <input name="typeM" type="checkbox" value="Musician" />
+                <span>Musician</span>
+            </label>   
+            <p>
+            <label>
+                <input name="typeV" type="checkbox" value="Venue" />
+                <span>Venue/Host</span>
+            </label>
+            </p>
+            <p></p>
+            <label>
+                <input name="typeB" type="checkbox" value="Both" />
+                <span>Musician and Vendor/Host</span>
+            </label>     
+            </p>
+        <label for="briefBio">Brief Bio:</label>
+           <textarea name="briefBio" id="briefBio"></textarea>
+        <label for="YTLinks">YouTube Link:</label>
+           <textarea name="YTLinks" id="YTLinks"></textarea>
         <label for="location">Location:</label>
             <input type="text" name="location"><br>
-        <label for="briefBio">Brief Bio:</label>
-           <textarea name="bio" id="briefBio"></textarea>
-        <label for="YTLinks">YouTube Link:</label>
-           <textarea name="YouTubeLinks" id="YTLinks"></textarea>
         <label for="start">Instrument:</label>
             <p>
             <label>
@@ -35,6 +48,10 @@
                 <span>Drums</span>
             </label>
             <label>
+                <input name="instrument" type="checkbox" value="Vocals"  />
+                <span>Vocals</span>
+            </label>
+            <label>
                 <input name="instrument" type="checkbox" value="Other"  />
                 <span>Other</span>
             </label>
@@ -44,7 +61,6 @@
         </form>
     </div>
 </div>
-<script src="/js/profile.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         var elems3 = document.querySelectorAll('select');

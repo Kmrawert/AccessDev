@@ -123,6 +123,11 @@ module.exports = function (app) {
             res.json(dbExample);
         });
     });
+    app.get("/api/editprofile/:id", function(req, res) {
+        db.talent.findOne({}).then(function(dbEditProfile) {
+            res.json(dbEditProfile);
+        });
+    });
 };
 
 const createHash = require('crypto').createHash
