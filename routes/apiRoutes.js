@@ -1,5 +1,5 @@
 require("dotenv").config();
-const apikey = '';
+const apikey = 'AFeiQyudCRNK8T2g46sKFz';
 var Kraken = require('kraken'),
     fs = require('fs');
 var db = require("../models");
@@ -12,7 +12,7 @@ var kraken = new Kraken({
     api_key: password,
     api_secret: krakenAPI
 });
-sgMail.setApiKey('');
+sgMail.setApiKey('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');
 
 module.exports = function (app) {
     // Get all examples      

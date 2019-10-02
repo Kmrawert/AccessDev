@@ -39,6 +39,21 @@ module.exports = function (app) {
         })
 
     });
+    app.get("/talentpool", checktoken, function (req, res) {
+        const { token } = req.cookies;
+        let looker;
+        var decoded = jwt.verify(token, 'grabbygig');
+        console.log(decoded.email);
+        db.User.findOne({ where: { email: decoded.email } }).then(user =>{
+            looker = user;
+            console.log(user);
+            db.User.findAll({}).then(function (talent) {
+                let data = {looker, talent}
+                res.render("talentpool", data);
+            });
+        })
+
+    });
     // Load Profile Creation page
     app.get("/profile", function (req, res) {
         // console.log(req.cookies);
