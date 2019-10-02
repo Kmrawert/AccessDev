@@ -11,7 +11,7 @@ let UserData = window.localStorage.getItem('UserData');
 let ParseData  = JSON.parse(UserData);
 console.log(ParseData);
 name.value= ParseData.name;
-UserId = ParseData.id;
+UserId.value = ParseData.id;
 
 
 fileInput.addEventListener('change', (event) => {

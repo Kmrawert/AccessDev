@@ -30,17 +30,13 @@ module.exports = function (app) {
         var decoded = jwt.verify(token, 'grabbygig');
         console.log(decoded.email);
         db.User.findOne({ where: { email: decoded.email } }).then(user =>{
+            
             console.log(user);
-            db.Talent.findOne({where: {UserId: user.id}}).then(result =>{
-                console.log(result);
-            })
+            db.Gigs.findAll({order:[['createdAt', 'DESC']]}).then(function (gigs) {
+                let posts = {gigs, user}
+                res.render("home", posts);
+            });
         })
-        db.Gigs.findAll({}).then(function (gigs) {
-            let posts = {
-                gigs: gigs
-            }
-            res.render("home", posts);
-        });
 
     });
     // Load Profile Creation page

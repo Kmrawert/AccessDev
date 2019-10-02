@@ -33,7 +33,7 @@ module.exports = function (app) {
         } else {
             band = instrument[0];
         }
-        gigs.create({ title, date, location, money, genre, description, instrument: band })
+        gigs.create({ title, date, location, money, genre, description, instrument: band})
             .then(data => {
                 res.redirect('/');
                 console.log(data);
@@ -77,7 +77,7 @@ module.exports = function (app) {
         const userData = req.body;
         userData.email = userData.email.trim().toLowerCase();
         userData.password = hash(userData.password.trim());
-        console.log(userData);
+        console.log(userData.password);
 
         //const token = createToken(userData)
         db.User.findOne({ where: { email: userData.email } })
@@ -112,7 +112,7 @@ module.exports = function (app) {
             band = instrument[0];
         }
         console.log(image);
-        db.Talent.create({ image, name, location, instrument: band, bio, YouTubeLinks, UserId }).then(function (dbProfile) {
+        db.User.update({ image, name, location, instrument: band, bio, YouTubeLinks},{where: {id: UserId}}).then(function (dbProfile) {
             res.redirect('/home');
         });
     });
