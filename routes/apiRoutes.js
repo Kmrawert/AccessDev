@@ -26,6 +26,8 @@ module.exports = function (app) {
 
     // Create a new example
     app.post("/api/gigs", function (req, res) {
+        const {token} = req.cookies;
+        var decoded = jwt.verify(token, 'grabbygig');
         const gigs = db.Gigs;
         const { title, date, location, money, genre, description, instrument } = req.body;
         if (instrument > 1) {
@@ -33,12 +35,15 @@ module.exports = function (app) {
         } else {
             band = instrument[0];
         }
-        gigs.create({ title, date, location, money, genre, description, instrument: band})
-            .then(data => {
-                res.redirect('/');
-                console.log(data);
+        db.User.findOne({ where: { email: decoded.email } }).then(user =>{
+            gigs.create({ title, date, location, money, genre, description, instrument: band, UserId: user.get('id')})
+                .then(data => {
+                    res.redirect('/');
+                    console.log(data);
+    
+                })
 
-            })
+        })
     });
 
     // Create a new user
@@ -48,8 +53,6 @@ module.exports = function (app) {
         userData.email = userData.email.trim().toLowerCase();
         // hashing the password
         userData.password = hash(userData.password.trim());
-        // const { name } = req.body;
-        // console.log(userData);
         db.User.findOne({ where: { email: userData.email } })
             .then(function (userResponce) {
                 if (userResponce !== null) {
@@ -109,7 +112,7 @@ module.exports = function (app) {
         if (instrument > 1) {
             let band = instrument.join(', ');
         } else {
-            band = instrument[0];
+            let band = instrument[0];
         }
         console.log(image);
         db.User.update({ image, name, location, instrument: band, bio, YouTubeLinks},{where: {id: UserId}}).then(function (dbProfile) {
