@@ -104,23 +104,6 @@ module.exports = function (app) {
 
 
     // Create a new example
-<<<<<<< HEAD
-    app.post("/api/profile", function(req, res) {
-
-        db.talent.create(req.body).then(function(dbProfile) {
-            res.json(dbProfile);
-            var opts = {
-                file: fs.createReadStream('file.jpg'),
-                wait: true
-            };
-            // kraken.upload(opts, function(err, data) {
-            //     if (err) {
-            //         console.log('Failed. Error message: %s', err);
-            //     } else {
-            //         console.log('Success. Optimized image URL: %s', data.kraked_url);
-            //     }
-            // });
-=======
     app.post("/api/profile", function (req, res) {
         const { image, name, location, instrument, bio, YouTubeLinks, UserId } = req.body;
         if (instrument > 1) {
@@ -131,7 +114,6 @@ module.exports = function (app) {
         console.log(image);
         db.Talent.create({ image, name, location, instrument: band, bio, YouTubeLinks, UserId }).then(function (dbProfile) {
             res.redirect('/home');
->>>>>>> c70a01720dfc29d5aeafd98479852fc184f7ed5d
         });
     });
 
