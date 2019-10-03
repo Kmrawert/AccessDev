@@ -1,14 +1,18 @@
 require("dotenv").config();
+fsPassword = process.env.FS_SECRET_KEY;
+console.log(fsPassword)
 const apikey = '##';
-    fs = require('fs');
+fs = require('fs');
 var db = require("../models");
 var jwt = require('jsonwebtoken');
 const sgMail = require('@sendgrid/mail');
 let token;
-sgMail.setApiKey('##');
+sgPassword = process.env.SENDGRID_API_KEY;
+console.log(sgPassword);
+sgMail.setApiKey(sgPassword);
 
 module.exports = function (app) {
-    // Get all examples      
+
     app.get("/api/gigs/:id", function (req, res) {
         db.Gigs.findOne({
             where: {
@@ -19,9 +23,9 @@ module.exports = function (app) {
         });
     });
 
-    // Create a new example
+
     app.post("/api/gigs", function (req, res) {
-        const {token} = req.cookies;
+        const { token } = req.cookies;
         var decoded = jwt.verify(token, 'grabbygig');
         const gigs = db.Gigs;
         let band;
@@ -31,28 +35,28 @@ module.exports = function (app) {
         } else {
             band = instrument;
         }
-        db.User.findOne({ where: { email: decoded.email } }).then(user =>{
-            gigs.create({ title, date, location, money, genre, description, instrument: band, UserId: user.get('id')})
+        db.User.findOne({ where: { email: decoded.email } }).then(user => {
+            gigs.create({ title, date, location, money, genre, description, instrument: band, UserId: user.get('id') })
                 .then(data => {
                     res.redirect('/');
                     console.log(data);
-    
+
                 })
 
         })
     });
     app.post("/api/giggrab", function (req, res) {
-        const {token} = req.cookies;
+        const { token } = req.cookies;
         let TalentId;
         let TalentName;
         var decoded = jwt.verify(token, 'grabbygig');
         const gigs = db.Gigs;
-        const { UserId} = req.body;
-        db.User.findOne({ where: { email: decoded.email} }).then( talent =>{
-                TalentId= talent.id;
-                TalentName = talent.name;
+        const { UserId } = req.body;
+        db.User.findOne({ where: { email: decoded.email } }).then(talent => {
+            TalentId = talent.id;
+            TalentName = talent.name;
 
-            db.User.findOne({ where: { id: UserId } }).then(user =>{
+            db.User.findOne({ where: { id: UserId } }).then(user => {
                 console.log(user.email);
                 console.log(decoded.email);
                 const msg = {
@@ -60,11 +64,11 @@ module.exports = function (app) {
                     from: decoded.email,
                     subject: `${TalentName} wants the gig!`,
                     text: `Hey, Lemme grab that Gig! see my profile at http://www.giggrab.com/${TalentId}! `
-                  };
-                  sgMail.send(msg);
-                  console.log('message sent');
+                };
+                sgMail.send(msg);
+                console.log('message sent');
                 res.status(204).end();
-    
+
             })
 
         })
@@ -87,7 +91,7 @@ module.exports = function (app) {
             })
             .then(function (data) {
                 console.log('user', data);
-               
+
                 res.json(data.dataValues);
 
             })
@@ -132,24 +136,32 @@ module.exports = function (app) {
         let band;
         const { image, name, location, instrument, bio, YouTubeLinks, UserId } = req.body;
         if (instrument > 1) {
-             band = instrument.join(', ');
+            band = instrument.join(', ');
         } else {
             band = instrument;
         }
         console.log(image);
-        db.User.update({ image, name, location, instrument: band, bio, YouTubeLinks},{where: {id: UserId}}).then(function (dbProfile) {
+        db.User.update({ image, name, location, instrument: band, bio, YouTubeLinks }, { where: { id: UserId } }).then(function (dbProfile) {
             res.redirect('/home');
         });
     });
 
-    // Delete an example by id
-    app.delete("/api/examples/:id", function (req, res) {
-        db.Example.destroy({ where: { id: req.params.id } }).then(function (dbExample) {
-            res.json(dbExample);
+    app.get("/api/editprofile/:id", function (req, res) {
+        db.talent.findOne({}).then(function (dbEditProfile) {
+            res.json(dbEditProfile);
         });
     });
-    app.get("/api/editprofile/:id", function(req, res) {
-        db.talent.findOne({}).then(function(dbEditProfile) {
+
+    app.get("/api/editprofile", function (req, res) {
+        const { token } = req.cookies;
+        var decoded = jwt.verify(token, 'grabbygig');
+        console.log('\n\n\n\ndecoded', decoded)
+        db.User.findOne({
+            where: {
+                email: decoded.email
+            }
+
+        }).then(function (dbEditProfile) {
             res.json(dbEditProfile);
         });
     });
