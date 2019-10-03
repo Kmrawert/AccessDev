@@ -10,15 +10,15 @@ module.exports = function(sequelize, DataTypes) {
 
     });
   
-    Rating.associate = function(models) {
-      // Associating Rating with Posts
-      // When an Rating is deleted, also delete any associated Posts
-      Rating.belongsTo(models.Talent, {
-        foreignKey: {
-          allowNull: false
-        }
-      });
-    };
+    // Rating.associate = function(models) {
+    //   // Associating Rating with Posts
+    //   // When an Rating is deleted, also delete any associated Posts
+    //   Rating.belongsTo(models.Talent, {
+    //     foreignKey: {
+    //       allowNull: false
+    //     }
+    //   });
+    // };
   
     return Rating;
   };

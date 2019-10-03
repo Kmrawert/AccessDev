@@ -1,15 +1,20 @@
 require("dotenv").config();
-const apikey = '';
+fsPassword = process.env.FS_SECRET_KEY;
+console.log(fsPassword)
+const apikey = '##';
 fs = require('fs');
 var db = require("../models");
 var jwt = require('jsonwebtoken');
 const sgMail = require('@sendgrid/mail');
 let token;
-sgMail.setApiKey("");
 
-module.exports = function(app) {
-    // Get all examples      
-    app.get("/api/gigs/:id", function(req, res) {
+sgPassword = process.env.SENDGRID_API_KEY;
+console.log(sgPassword);
+sgMail.setApiKey(sgPassword);
+
+module.exports = function (app) {
+
+    app.get("/api/gigs/:id", function (req, res) {
         db.Gigs.findOne({
             where: {
                 id: req.params.id
@@ -41,6 +46,7 @@ module.exports = function(app) {
 
         })
     });
+
     app.post("/api/giggrab", function(req, res) {
         const { token } = req.cookies;
         let TalentId;
@@ -137,19 +143,29 @@ module.exports = function(app) {
             band = instrument;
         }
         console.log(image);
+
         db.User.update({ image, name, location, instrument: band, bio, YouTubeLinks }, { where: { id: UserId } }).then(function(dbProfile) {
+
             res.redirect('/home');
         });
     });
 
-    // Delete an example by id
-    app.delete("/api/examples/:id", function(req, res) {
-        db.Example.destroy({ where: { id: req.params.id } }).then(function(dbExample) {
-            res.json(dbExample);
+    app.get("/api/editprofile/:id", function (req, res) {
+        db.talent.findOne({}).then(function (dbEditProfile) {
+            res.json(dbEditProfile);
         });
     });
-    app.get("/api/editprofile/:id", function(req, res) {
-        db.talent.findOne({}).then(function(dbEditProfile) {
+
+    app.get("/api/editprofile", function (req, res) {
+        const { token } = req.cookies;
+        var decoded = jwt.verify(token, 'grabbygig');
+        console.log('\n\n\n\ndecoded', decoded)
+        db.User.findOne({
+            where: {
+                email: decoded.email
+            }
+
+        }).then(function (dbEditProfile) {
             res.json(dbEditProfile);
         });
     });

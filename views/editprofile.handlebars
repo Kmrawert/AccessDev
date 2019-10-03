@@ -3,9 +3,14 @@
     <div id="formArea">
         <form action="/profile">
         <label for="Name">Name:</label>
-            <input type="text" name="fname"><br>
+            <input type="text" value = {{data.name}} name="fname"><br>
         <label for="proImage">Profile Image:</label><br>
-        <label for="type">Are you a:</label>
+            <input id="fileInput"  type="file"
+       accept="image/png, image/jpeg">
+       <input id= "linkName" name = "image" type="text">
+       <input id= "UserId" name = "UserId" type="text">
+       <br>
+        {{!-- <label for="type">Are you a:</label>
             <p>
             <label>
                 <input name="typeM" type="checkbox" value="Musician" />
@@ -22,7 +27,7 @@
                 <input name="typeB" type="checkbox" value="Both" />
                 <span>Musician and Vendor/Host</span>
             </label>     
-            </p>
+            </p> --}}
         <label for="briefBio">Brief Bio:</label>
            <textarea name="briefBio" id="briefBio"></textarea>
         <label for="YTLinks">YouTube Link:</label>
@@ -56,12 +61,15 @@
                 <span>Other</span>
             </label>
         </p>
-        <input type="submit" value="Submit">
+        <input  id="editProfile" type="submit" value="Submit">
 
         </form>
     </div>
 </div>
 <script>
+alert('jhgffff')
+    fetch("/api/editprofile").then(()=> console.log('adsasdsads'))
+
     document.addEventListener('DOMContentLoaded', function() {
         var elems3 = document.querySelectorAll('select');
         var instances = M.FormSelect.init(elems3);
