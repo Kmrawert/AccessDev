@@ -1,9 +1,11 @@
 require("dotenv").config();
-const apikey = 'AFeiQyudCRNK8T2g46sKFz';
+const apikey = '##';
     fs = require('fs');
 var db = require("../models");
 var jwt = require('jsonwebtoken');
+const sgMail = require('@sendgrid/mail');
 let token;
+sgMail.setApiKey('##');
 
 module.exports = function (app) {
     // Get all examples      
@@ -19,19 +21,53 @@ module.exports = function (app) {
 
     // Create a new example
     app.post("/api/gigs", function (req, res) {
+        const {token} = req.cookies;
+        var decoded = jwt.verify(token, 'grabbygig');
         const gigs = db.Gigs;
+        let band;
         const { title, date, location, money, genre, description, instrument } = req.body;
         if (instrument > 1) {
-            let band = instrument.join(', ');
+            band = instrument.join(', ');
         } else {
-            band = instrument[0];
+            band = instrument;
         }
-        gigs.create({ title, date, location, money, genre, description, instrument: band})
-            .then(data => {
-                res.redirect('/');
-                console.log(data);
+        db.User.findOne({ where: { email: decoded.email } }).then(user =>{
+            gigs.create({ title, date, location, money, genre, description, instrument: band, UserId: user.get('id')})
+                .then(data => {
+                    res.redirect('/');
+                    console.log(data);
+    
+                })
 
+        })
+    });
+    app.post("/api/giggrab", function (req, res) {
+        const {token} = req.cookies;
+        let TalentId;
+        let TalentName;
+        var decoded = jwt.verify(token, 'grabbygig');
+        const gigs = db.Gigs;
+        const { UserId} = req.body;
+        db.User.findOne({ where: { email: decoded.email} }).then( talent =>{
+                TalentId= talent.id;
+                TalentName = talent.name;
+
+            db.User.findOne({ where: { id: UserId } }).then(user =>{
+                console.log(user.email);
+                console.log(decoded.email);
+                const msg = {
+                    to: user.email,
+                    from: decoded.email,
+                    subject: `${TalentName} wants the gig!`,
+                    text: `Hey, Lemme grab that Gig! see my profile at http://www.giggrab.com/${TalentId}! `
+                  };
+                  sgMail.send(msg);
+                  console.log('message sent');
+                res.status(204).end();
+    
             })
+
+        })
     });
 
     // Create a new user
@@ -41,8 +77,6 @@ module.exports = function (app) {
         userData.email = userData.email.trim().toLowerCase();
         // hashing the password
         userData.password = hash(userData.password.trim());
-        // const { name } = req.body;
-        // console.log(userData);
         db.User.findOne({ where: { email: userData.email } })
             .then(function (userResponce) {
                 if (userResponce !== null) {
@@ -95,11 +129,12 @@ module.exports = function (app) {
     });
 
     app.post("/api/profile", function (req, res) {
+        let band;
         const { image, name, location, instrument, bio, YouTubeLinks, UserId } = req.body;
         if (instrument > 1) {
-            let band = instrument.join(', ');
+             band = instrument.join(', ');
         } else {
-            band = instrument[0];
+            band = instrument;
         }
         console.log(image);
         db.User.update({ image, name, location, instrument: band, bio, YouTubeLinks},{where: {id: UserId}}).then(function (dbProfile) {

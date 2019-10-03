@@ -49,15 +49,15 @@ module.exports = function(sequelize, DataTypes) {
 
     });
   
-    // Gigs.associate = function(models) {
-    //     // Associating Gigs with Gigs
-    //     // When an Gigs is deleted, also delete any associated Gigs
-    //     Gigs.belongsTo(models.Talent, {
-    //         foreignKey: {
-    //           allowNull: false
-    //         }
-    //       });
-    //   };
+    Gigs.associate = function(models) {
+        // Associating Gigs with Gigs
+        // When an Gigs is deleted, also delete any associated Gigs
+        Gigs.belongsTo(models.User, {
+            foreignKey: {
+              allowNull: false
+            }
+          });
+      };
   
     return Gigs;
   };
