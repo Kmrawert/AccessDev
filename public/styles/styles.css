@@ -4,8 +4,11 @@
 body{
   margin: 0;
   padding: 0;
+  background-color: #485b7a;
 }
-
+h2, h3, h4, h5, h6, .brand-logo {
+  font-family: 'Arvo', serif;
+}
 .mainContent{
   position: relative;
   display: flex;
@@ -29,9 +32,12 @@ flex-basis: 25%;
   background: white;
   top: -1px;
 display: flex;
+
 /* border-right: 1px solid black; */
 text-align: center;
 flex-flow: column;
+color: white;
+background-color: #485b7a;
 
 }
 
@@ -43,8 +49,25 @@ flex-flow: column;
 text-align: center;
 flex-flow: column;
 flex-basis: 37.5%;
+background-color: #bdc7d9;
+}
+.brand-logo {
+  margin-left: 20px;
+  text-shadow: black;
 }
 
+nav {
+  background-color: #2a303b;
+}
+.btn, .btn-large, .btn-small {
+  color: #6199ff;
+  background-color: #2a303b;
+}
+
+.btn:hover, .btn-large:hover, .btn-small:hover {
+  color: #2a303b;;
+  background-color: #6199ff ;
+}
 
 #profilePic{
   width:150px;

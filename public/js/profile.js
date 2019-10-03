@@ -1,4 +1,4 @@
-const apikey = 'AFeiQyudCRNK8T2g46sKFz';
+const apikey = '##';
 var fileInput = document.querySelector('#fileInput');
 const linkName = document.querySelector('#linkName');
 const name = document.querySelector('#profilename');
