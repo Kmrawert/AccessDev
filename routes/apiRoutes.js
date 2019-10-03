@@ -7,6 +7,7 @@ var db = require("../models");
 var jwt = require('jsonwebtoken');
 const sgMail = require('@sendgrid/mail');
 let token;
+
 sgPassword = process.env.SENDGRID_API_KEY;
 console.log(sgPassword);
 sgMail.setApiKey(sgPassword);
@@ -18,13 +19,13 @@ module.exports = function (app) {
             where: {
                 id: req.params.id
             }
-        }).then(function (post) {
+        }).then(function(post) {
             res.json(post);
         });
     });
 
-
-    app.post("/api/gigs", function (req, res) {
+    // Create a new example
+    app.post("/api/gigs", function(req, res) {
         const { token } = req.cookies;
         var decoded = jwt.verify(token, 'grabbygig');
         const gigs = db.Gigs;
@@ -45,7 +46,8 @@ module.exports = function (app) {
 
         })
     });
-    app.post("/api/giggrab", function (req, res) {
+
+    app.post("/api/giggrab", function(req, res) {
         const { token } = req.cookies;
         let TalentId;
         let TalentName;
@@ -75,27 +77,27 @@ module.exports = function (app) {
     });
 
     // Create a new user
-    app.post("/api/signup", function (req, res) {
+    app.post("/api/signup", function(req, res) {
         const userData = req.body;
         userData.name = userData.name.trim().toLowerCase();
         userData.email = userData.email.trim().toLowerCase();
         // hashing the password
         userData.password = hash(userData.password.trim());
         db.User.findOne({ where: { email: userData.email } })
-            .then(function (userResponce) {
+            .then(function(userResponce) {
                 if (userResponce !== null) {
                     throw new Error("This user already exist!")
                 }
 
                 return db.User.create(userData)
             })
-            .then(function (data) {
+            .then(function(data) {
                 console.log('user', data);
 
                 res.json(data.dataValues);
 
             })
-            .catch(function (error) {
+            .catch(function(error) {
                 console.log("login error", error)
                 res.status(500).json({
                     message: error.message
@@ -104,7 +106,7 @@ module.exports = function (app) {
     });
 
     // login existing user
-    app.post("/api/login", function (req, res) {
+    app.post("/api/login", function(req, res) {
         const userData = req.body;
         userData.email = userData.email.trim().toLowerCase();
         userData.password = hash(userData.password.trim());
@@ -112,18 +114,18 @@ module.exports = function (app) {
 
         //const token = createToken(userData)
         db.User.findOne({ where: { email: userData.email } })
-            .then(function (userResponce) {
+            .then(function(userResponce) {
                 if (userResponce === null) {
                     throw new Error("user is not found")
                 }
                 console.log("keep on eye", userResponce)
-                // function that compares password  
+                    // function that compares password  
                 comparePassword(userResponce.dataValues.password, userData.password);
                 token = jwt.sign({ email: userResponce.email }, 'grabbygig');
                 res.cookie('token', token).status(204).end();
 
             })
-            .catch(function (error) {
+            .catch(function(error) {
                 console.log("login error", error)
                 res.status(500).json({
                     message: error.message
@@ -132,7 +134,7 @@ module.exports = function (app) {
 
     });
 
-    app.post("/api/profile", function (req, res) {
+    app.post("/api/profile", function(req, res) {
         let band;
         const { image, name, location, instrument, bio, YouTubeLinks, UserId } = req.body;
         if (instrument > 1) {
@@ -141,7 +143,9 @@ module.exports = function (app) {
             band = instrument;
         }
         console.log(image);
-        db.User.update({ image, name, location, instrument: band, bio, YouTubeLinks }, { where: { id: UserId } }).then(function (dbProfile) {
+
+        db.User.update({ image, name, location, instrument: band, bio, YouTubeLinks }, { where: { id: UserId } }).then(function(dbProfile) {
+
             res.redirect('/home');
         });
     });
