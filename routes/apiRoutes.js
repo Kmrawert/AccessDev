@@ -1,17 +1,10 @@
 require("dotenv").config();
 const apikey = '##';
-var Kraken = require('kraken'),
     fs = require('fs');
 var db = require("../models");
 var jwt = require('jsonwebtoken');
 const sgMail = require('@sendgrid/mail');
 let token;
-var password = process.env.krakenAPI_Secret;
-var krakenAPI = process.env.krakenAPI_Key;
-var kraken = new Kraken({
-    api_key: password,
-    api_secret: krakenAPI
-});
 sgMail.setApiKey('##');
 
 module.exports = function (app) {
@@ -135,9 +128,6 @@ module.exports = function (app) {
 
     });
 
-
-
-    // Create a new example
     app.post("/api/profile", function (req, res) {
         let band;
         const { image, name, location, instrument, bio, YouTubeLinks, UserId } = req.body;
@@ -156,6 +146,11 @@ module.exports = function (app) {
     app.delete("/api/examples/:id", function (req, res) {
         db.Example.destroy({ where: { id: req.params.id } }).then(function (dbExample) {
             res.json(dbExample);
+        });
+    });
+    app.get("/api/editprofile/:id", function(req, res) {
+        db.talent.findOne({}).then(function(dbEditProfile) {
+            res.json(dbEditProfile);
         });
     });
 };

@@ -1,7 +1,8 @@
 var db = require("../models");
 var jwt = require('jsonwebtoken');
 
-module.exports = function (app) {
+// middleware 
+module.exports = function(app) {
     const checktoken = (req, res, next) => {
         const { token } = req.cookies;
         if (token) {
@@ -10,30 +11,37 @@ module.exports = function (app) {
             res.redirect('/login');
         }
     }
-    app.get("/login", function (req, res) {
+    app.get("/login", function(req, res) {
+        // delete cookies
+        res.clearCookie("token");
+
         res.render("login", {});
     });
 
     // Sign up page 
-    app.get("/signup", function (req, res) {
+    app.get("/signup", function(req, res) {
         res.render("signup", {});
     })
 
 
     // app.use(cookieParser())
-    app.get('/', checktoken, function (req, res) {
-        res.redirect('/home');
-    })
-    // Load main content page
-    app.get("/home", checktoken, function (req, res) {
+    app.get('/', checktoken, function(req, res) {
+            res.redirect('/home');
+        })
+        // Load main content page
+    app.get("/home", checktoken, function(req, res) {
         const { token } = req.cookies;
         var decoded = jwt.verify(token, 'grabbygig');
         console.log(decoded.email);
-        db.User.findOne({ where: { email: decoded.email } }).then(user =>{
-            
+        db.User.findOne({ where: { email: decoded.email } }).then(user => {
+
             console.log(user);
-            db.Gigs.findAll({order:[['createdAt', 'DESC']]}).then(function (gigs) {
-                let posts = {gigs, user}
+            db.Gigs.findAll({
+                order: [
+                    ['createdAt', 'DESC']
+                ]
+            }).then(function(gigs) {
+                let posts = { gigs, user }
                 res.render("home", posts);
             });
         })
@@ -55,12 +63,27 @@ module.exports = function (app) {
 
     });
     // Load Profile Creation page
-    app.get("/profile", function (req, res) {
+    app.get("/profile", checktoken, function(req, res) {
         // console.log(req.cookies);
-        res.render("profile", {});
+        const { token } = req.cookies;
+        // var decoded = jwt.verify(token, 'grabbygig');
+        db.User.findOne({ where: { email: "kmrawert@yahoo.com"} }).then(user =>{
+            console.log(user);
+            db.Talent.findOne({where: {id: user.id}}).then(result =>{
+                res.render("profile", {profileData: result});
+                console.log(result);
+            })
+        })
+        // res.render("profile", {});
 
     });
-    app.get("/giftgig", checktoken, function (req, res) {
+    // Load Edit Profile Page
+    app.get("/editprofile", function(req, res) {
+        // console.log(req.cookies);
+        res.render("editprofile", {});
+    });
+
+    app.get("/giftgig", checktoken, function(req, res) {
         res.render("giftgig", {});
 
     });
@@ -68,8 +91,8 @@ module.exports = function (app) {
     // Login page
 
     // Load example page and pass in an example by id
-    app.get("/example/:id", function (req, res) {
-        db.Example.findOne({ where: { id: req.params.id } }).then(function (dbExample) {
+    app.get("/example/:id", function(req, res) {
+        db.Example.findOne({ where: { id: req.params.id } }).then(function(dbExample) {
             res.render("example", {
                 example: dbExample
             });
@@ -77,7 +100,7 @@ module.exports = function (app) {
     });
 
     // Render 404 page for any unmatched routes
-    app.get("*", function (req, res) {
+    app.get("*", function(req, res) {
         res.render("404");
     });
 
