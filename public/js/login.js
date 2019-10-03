@@ -23,7 +23,6 @@ loginForm.addEventListener("submit", function(event) {
         console.log("it's login in", res)
             // fix the route for login --> goes home page
 
-        // window.localStorage.setItem("token", res.token);
         window.location = '/home'
 
 
