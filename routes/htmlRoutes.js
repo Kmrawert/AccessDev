@@ -50,9 +50,19 @@ module.exports = function(app) {
     // Load Profile Creation page
     app.get("/profile", checktoken, function(req, res) {
         // console.log(req.cookies);
-        res.render("profile", {});
+        const { token } = req.cookies;
+        // var decoded = jwt.verify(token, 'grabbygig');
+        db.User.findOne({ where: { email: "kmrawert@yahoo.com"} }).then(user =>{
+            console.log(user);
+            db.Talent.findOne({where: {id: user.id}}).then(result =>{
+                res.render("profile", {profileData: result});
+                console.log(result);
+            })
+        })
+        // res.render("profile", {});
 
     });
+    // Load Edit Profile Page
     app.get("/editprofile", function(req, res) {
         // console.log(req.cookies);
         res.render("editprofile", {});

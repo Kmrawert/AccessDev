@@ -1,16 +1,9 @@
 require("dotenv").config();
 const apikey = 'AFeiQyudCRNK8T2g46sKFz';
-var Kraken = require('kraken'),
     fs = require('fs');
 var db = require("../models");
 var jwt = require('jsonwebtoken');
 let token;
-var password = process.env.krakenAPI_Secret;
-var krakenAPI = process.env.krakenAPI_Key;
-var kraken = new Kraken({
-    api_key: password,
-    api_secret: krakenAPI
-});
 
 module.exports = function(app) {
     // Get all examples      
@@ -102,10 +95,14 @@ module.exports = function(app) {
 
     });
 
+<<<<<<< HEAD
 
 
     // Create a new example
     app.post("/api/profile", function(req, res) {
+=======
+    app.post("/api/profile", function (req, res) {
+>>>>>>> dd8ce49b035c9df2e65dd0e7878dbb21c3526152
         const { image, name, location, instrument, bio, YouTubeLinks, UserId } = req.body;
         if (instrument > 1) {
             let band = instrument.join(', ');
