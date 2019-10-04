@@ -1,7 +1,6 @@
 require("dotenv").config();
 fsPassword = process.env.FS_SECRET_KEY;
-console.log(fsPassword)
-const apikey = '##';
+const apikey = fsPassword;
 fs = require('fs');
 var db = require("../models");
 var jwt = require('jsonwebtoken');
