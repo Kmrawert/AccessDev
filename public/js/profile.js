@@ -1,6 +1,4 @@
-require("dotenv").config();
-fsPassword = process.env.FS_SECRET_KEY;
-const apikey = fsPassword;
+const apikey = 'AFeiQyudCRNK8T2g46sKFz';
 var fileInput = document.querySelector('#fileInput');
 const linkName = document.querySelector('#linkName');
 const name = document.querySelector('#profilename');
@@ -24,7 +22,7 @@ fileInput.addEventListener('change', (event) => {
     .then(res => {
       console.log('success: ', res);
         linkName.value = res.url;
-        console.log(image);
+        console.log(linkName.value);
     })
     .catch(err => {
       console.log(err)

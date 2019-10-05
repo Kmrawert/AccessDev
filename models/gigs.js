@@ -53,9 +53,7 @@ module.exports = function(sequelize, DataTypes) {
         // Associating Gigs with Gigs
         // When an Gigs is deleted, also delete any associated Gigs
         Gigs.belongsTo(models.User, {
-            foreignKey: {
-              allowNull: false
-            }
+            foreignKey: { as: 'author',  foreignKey: 'UserId'}
           });
       };
   

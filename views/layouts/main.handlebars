@@ -5,45 +5,41 @@
   <meta charset="utf-8">
   <meta http-equiv='X-UA-Compatible' content='IE=edge'>
   <meta name='viewport' content='width=device-width, initial-scale=1'>
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Arvo&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Arvo&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/styles/styles.css" media="screen" title="no title" charset="utf-8">
   <script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
   <title>Home Page</title>
 </head>
 
 <body>
-   <nav>
+  <nav>
     <div class="nav-wrapper">
       <a href="/home" class="brand-logo">Gig-Grab</a>
       <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+      
       <ul class="right hide-on-med-and-down">
+        {{!-- <li><a id="showStats" href="/yourgigs">Your Gigs</a></li> --}}
+        <li><a href="/activity">Activity</a></li>
         <li><a href="/talentpool">Talent Pool</a></li>
-        <li><a href="/login">Logout</a></li>
+        <li><a id="logout" href="#">Logout</a></li>
       </ul>
     </div>
   </nav>
 
   <ul class="sidenav" id="mobile-demo">
-    <li><a href="/">Profile Pic here</a></li>
-    <li><a href="/">Profile Name here</a></li>
-    <li><a href="/">Profile Genre here</a></li>
-    <li><a href="/">Profile rating here</a></li>
-    <li><a href="/"> # of Gigs Completed here</a></li>
-    <li><a href="/">Money Earned from Gigs completed so far</a></li>
-    <li><a href="/">Profile Pic here</a></li>
-    <li><a href="/giftgig">Gift a Gig</a></li>
-    <li><a href="/home">View Gigs</a></li>
-    <li><a href="/profile:id">Profile</a></li>
-    <li><a href="/login">Logout</a></li>
+    <li><a href="/activity">Activity</a></li>
+    <li><a href="/talentpool">Talent Pool</a></li>
+    <li><a href="/home">Home</a></li>
+
   </ul>
   {{{body}}}
-      <script src="https://code.jquery.com/jquery-3.4.0.min.js"
-        integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.4.0.min.js" integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg="
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+  <script src="/js/session.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </body>
 
 </html>

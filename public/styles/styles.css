@@ -56,7 +56,7 @@ background-color: #bdc7d9;
   text-shadow: black;
 }
 
-nav {
+nav,footer {
   background-color: #2a303b;
 }
 .btn, .btn-large, .btn-small {
@@ -64,7 +64,7 @@ nav {
   background-color: #2a303b;
 }
 
-.btn:hover, .btn-large:hover, .btn-small:hover {
+.btn:hover, .btn-large:hover, .btn-small:hover,.grabbed {
   color: #2a303b;;
   background-color: #6199ff ;
 }
@@ -156,6 +156,7 @@ nav {
   position: relative;
   width: 25%;
   height:auto;
+  max-height: 500px;
 
 
 }
@@ -178,3 +179,47 @@ nav {
 #UserId{
   display:none;
 }
+#namepage{
+  position: relative;
+  width: 75%;
+  margin: 10px auto 0;
+  display: flex;
+  flex-flow: column;
+}
+#picContainer{
+  position: relative;
+  width: 25%;
+  margin: 0 auto;
+
+}
+#picContainer >img {
+  width: 100%;
+}
+#namepageContent{
+  position: relative;
+  display: flex;
+  flex-flow: column;
+  width: 75%;
+  margin: 0 auto;
+  text-align: center;
+
+}
+#gigHeader,
+#gigContent{
+  background-color: #bdc7d9;
+}
+
+@media only screen and (max-width: 600px) {
+  #profileWrapper,
+  #profileArea{
+    display: none;
+  }
+  #postArea, 
+  #gigArea{
+    width: 75%;
+  }
+  .mainContent{
+    justify-content: center;
+  }
+}
+

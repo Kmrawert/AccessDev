@@ -4,6 +4,7 @@ var $exampleDescription = $("#example-description");
 var $submitBtn = $("#submit");
 var $exampleList = $("#example-list");
 var more = document.querySelectorAll('.postContainer a');
+var profile = document.querySelectorAll('.postContainer button');
 
 
 // The API object contains methods for each kind of request we'll make
@@ -44,8 +45,9 @@ more.forEach(link => {
         button.addEventListener('click', e => {
           e.preventDefault();
           const UserId = button.getAttribute('UserId');
+          M.toast({html: 'Grabbed',classes: 'grabbed'})
           const body = { UserId }
-          fetch('/api/giggrab', {
+          fetch(`/api/giggrab/${id}`, {
             method: 'post',
             body: JSON.stringify(body),
             headers: {
@@ -60,6 +62,21 @@ more.forEach(link => {
         })
 
       })
+  })
+
+})
+
+profile.forEach(link =>{
+  let id = link.getAttribute('value');
+  link.addEventListener('click', e =>{
+    fetch(`/api/users/${id}`)
+    .then(res => res.json())
+    .then(data =>{
+      console.log(data);
+      window.location = `/users/${data.name}`;
+    })
+
+
   })
 
 })

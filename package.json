@@ -11,7 +11,7 @@
     "@sendgrid/mail": "^6.4.0",
     "cookie-parser": "^1.4.4",
     "dotenv": "^8.0.0",
-    "express": "^4.17.1",
+    "express": "^4.17.0",
     "express-handlebars": "^3.1.0",
     "jsonwebtoken": "^8.5.1",
     "kraken": "^0.4.0",
@@ -23,5 +23,15 @@
   },
   "devDependencies": {
     "cross-env": "^5.2.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/boyangm/GigGrab.git"
+  },
+  "keywords": [],
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/boyangm/GigGrab/issues"
+  },
+  "homepage": "https://github.com/boyangm/GigGrab#readme"
 }

@@ -1,5 +1,3 @@
-//import { json } from "sequelize/types";
-
 var loginForm = document.getElementById("login-form");
 console.log(loginForm);
 
@@ -22,7 +20,8 @@ loginForm.addEventListener("submit", function(event) {
     $.post(url, data, function(res) {
         console.log("it's login in", res)
             // fix the route for login --> goes home page
-
+        window.localStorage.setItem("UserData", JSON.stringify(res));
+        console.log(res);
         window.location = '/home'
 
 
