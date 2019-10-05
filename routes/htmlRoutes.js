@@ -53,30 +53,6 @@ module.exports = function (app) {
         })
 
     });
-    // app.get("/yourgigs", checktoken, function (req, res) {
-    //     const { token } = req.cookies;
-    //     var decoded = jwt.verify(token, 'grabbygig');
-       
-    //     console.log(decoded.email);
-    //     db.User.findOne({ where: { email: decoded.email } }).then(user => {
-    //         db.Gigs.findAll({ where: { UserId: user.get('id') } }).then(gigs => {
-    //             let event = [];
-    //             Promise.all(gigs.map(async gig => {
-    //                 await db.Event.findAll({ where: { GigsId: gig.id, open: 1 } }).then( data =>{
-    //                     console.log(data);
-    //                     event.push(data);
-    //                 }
-    //                 )
-    //                 return event
-    //             })).then(data => {
-    //                 console.log(data);
-    //                 res.json(data);
-    //         })
-    //         })
-
-    //     })
-
-    // });
     app.get("/talentpool", checktoken, function (req, res) {
         const { token } = req.cookies;
         let looker;
