@@ -63,6 +63,9 @@ module.exports = function(app) {
 
     });
     // Load Profile Creation page
+    app.get("/profile", checktoken, function(req, res) {
+        res.render("profile", {});
+    });
 
     // Load Edit Profile Page
     app.get("/editprofile", checktoken,  function(req, res) {

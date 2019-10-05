@@ -1,4 +1,6 @@
-const apikey = '##';
+require("dotenv").config();
+fsPassword = process.env.FS_SECRET_KEY;
+const apikey = fsPassword;
 var fileInput = document.querySelector('#fileInput');
 const linkName = document.querySelector('#linkName');
 const name = document.querySelector('#profilename');
